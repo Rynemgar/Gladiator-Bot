@@ -1,0 +1,12 @@
+{
+  "name": "gladiator-bot",
+  "version": "1.0.0",
+  "description": "My Gladiator bot",
+  "main": "bot.js",
+  "author": "Rynem",
+  "dependencies": {
+    "discord.io": "^2.5.3",
+    "discord.js": "^11.3.2",
+    "winston": "^2.4.2"
+  }
+}
