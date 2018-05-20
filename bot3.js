@@ -25,6 +25,9 @@ client.on('message', message => {
                 },
         'taunt': () => {
             message.channel.send(`You're being taunted! Will you stand for that or ${config.prefix}challenge the coward!?`)
+        },
+        'git': () => {
+            message.channel.send(`You can find the most recently updated code at https://github.com/Rynemgar/Gladiator-Bot`)
         }
     }
     const trigger = message.content.split(' ')[0].slice(1);
