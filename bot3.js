@@ -25,12 +25,17 @@ client.on('message', message => {
         'challenge': () => {
             if (member) {
                 message.channel.send(`${member.user} You have been challenged to ritual combat by ${message.author}!  Proceed to the arena... If you dare!`)
-              } else {
-                message.channel.send(`${member.author}, must be drunk.  Who challenge's nobody in particular!?`)
+            } else {
+                message.channel.send(`${message.author}, must be drunk.  Who challenges nobody in particular?!`)
               }
             },
         'taunt': () => {
-            message.channel.send(`${member.user} You're being taunted by ${message.author}! Will you stand for that or ${config.prefix}challenge the coward!?`)
+            if (member) {
+                message.channel.send(`${member.user} You're being taunted by ${message.author}! Will you stand for that or ${config.prefix}challenge the coward?!`)
+            }
+            else {
+                message.channel.send(`${message.author} must have a death wish!  Maybe consider taunting someone in particular next time eh?`)
+            }
         },
         'git': () => {
             message.channel.send(`You can find the most recently updated code at https://github.com/Rynemgar/Gladiator-Bot`)
