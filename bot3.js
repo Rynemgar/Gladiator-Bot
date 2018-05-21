@@ -4,13 +4,15 @@ const config = require("./config.json");
 const token = require("./token.json");
 const fs = require("fs");
 
+
 client.on("ready", () => {
   console.log("I am ready...Are you?!");
 });
 
 client.on('message', message => {
     if (message.content[0] !== config.prefix) return;
-    const commands = {
+        const member = message.mentions.members.first();
+        const commands = {
         'prefix': () => {
             if(message.author.id !== config.ownerID) {
             message.channel.send("Only our Emporer can change my prefix!");
@@ -21,10 +23,14 @@ client.on('message', message => {
         config.prefix = newPrefix;
         fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);},
         'challenge': () => {
-            message.channel.send(`${user.toString()} You have been challenged to ritual combat!  Proceed to the arena... If you dare!`)
-                },
+            if (member) {
+                message.channel.send(`${member.user} You have been challenged to ritual combat by ${message.author}!  Proceed to the arena... If you dare!`)
+              } else {
+                message.channel.send(`${member.author}, must be drunk.  Who challenge's nobody in particular!?`)
+              }
+            },
         'taunt': () => {
-            message.channel.send(`You're being taunted! Will you stand for that or ${config.prefix}challenge the coward!?`)
+            message.channel.send(`${member.user} You're being taunted by ${message.author}! Will you stand for that or ${config.prefix}challenge the coward!?`)
         },
         'git': () => {
             message.channel.send(`You can find the most recently updated code at https://github.com/Rynemgar/Gladiator-Bot`)
