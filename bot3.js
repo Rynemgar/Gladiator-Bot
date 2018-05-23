@@ -11,6 +11,7 @@ client.on("ready", () => {
 
 client.on('message', message => {
     if (message.content[0] !== config.prefix) return;
+    if (message.author.bot) return;
         const member = message.mentions.members.first();
         const commands = {
         'prefix': () => {
@@ -39,10 +40,18 @@ client.on('message', message => {
         },
         'git': () => {
             message.channel.send(`You can find the most recently updated code at https://github.com/Rynemgar/Gladiator-Bot`)
+        },
+        'bow': () => {
+            if (member) {
+            message.channel.send(`${message.author} bows to ${member.user} and adapts a fighting stance rarely seen in these parts...`)
         }
-    }
+            else {
+            message.channel.send(`${message.author} bows down.  Everyone around wonders who they are bowing to...`)
+            }
+        },
+    };
     const trigger = message.content.split(' ')[0].slice(1);
-    commands[trigger]();
+    if (commands[trigger]) commands[trigger]();
   })
 
 
