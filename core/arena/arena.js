@@ -41,7 +41,7 @@ class Arena {
     const target = attacker === this.gladiator1 ? this.gladiator2 : this.gladiator1;
     if (attacker && target) {
       const roll = Math.random();
-      if (roll > attack.chance) {
+      if (roll < attack.chance) {
         target.damage(attack.damage);
 
         if (target.health <= 0) {
