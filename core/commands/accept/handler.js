@@ -7,7 +7,7 @@ class AcceptCommand {
     this.cooldown = 1000;
   }
   handler(message) {
-    if (this.lastUsed > Date.now() + this.cooldown) return;
+    if (this.lastUsed + this.cooldown > Date.now()) return;
 
     const challenge = challenges.acceptChallenge(message.author);
 
