@@ -8,7 +8,7 @@ class ChallengeCommand {
   }
 
   handler(message) {
-    if (this.lastUsed > Date.now() + this.cooldown) return;
+    if (this.lastUsed + this.cooldown > Date.now()) return;
 
     const mention = message.mentions.users.size > 0;
     let response = randomElement(responses[mention ? 'mention' : 'noMention']);
