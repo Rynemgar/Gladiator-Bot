@@ -1,6 +1,7 @@
 const responses = require('./responses');
 const randomElement = require('../../../utils/get-random-element');
 const parseVariables = require('../../response-variables');
+const challenges = require('../../arena/challenges');
 
 class ChallengeCommand {
   constructor() {
@@ -13,6 +14,7 @@ class ChallengeCommand {
     const mention = message.mentions.users.size > 0;
     let response = randomElement(responses[mention ? 'mention' : 'noMention']);
     response = parseVariables(response, message);
+    challenges.addChallenge(message.author, message.mentions.users.first());
     message.channel.send(response);
 
     this.lastUsed = Date.now();
