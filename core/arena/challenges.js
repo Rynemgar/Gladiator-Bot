@@ -7,7 +7,7 @@ class Challenges {
 
     setInterval(() => {
       for (let i = 0; i <= this.challenges.length; i++) {
-        if (this.challenges[i].timestamp + this.challengeDuration > Date.now()) {
+        if (this.challenges[i] && this.challenges[i].timestamp + this.challengeDuration > Date.now()) {
           this.challenges.splice(i, 1);
         }
       }
