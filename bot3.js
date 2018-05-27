@@ -23,26 +23,109 @@ client.on('message', message => {
         // change the configuration in memory
         config.prefix = newPrefix;
         fs.writeFile("./config.json", JSON.stringify(config), (err) => console.error);},
-        'challenge': () => {
-            if (member) {
-                message.channel.send(`${member.user} You have been challenged to ritual combat by ${message.author}!  Proceed to the arena... If you dare!`)
-            } else {
-                message.channel.send(`${message.author}, must be drunk.  Who challenges nobody in particular?!`)
-              }
-            },
-        'taunt': () => {
-            if (member) {
-                message.channel.send(`${member.user} You're being taunted by ${message.author}! Will you stand for that or ${config.prefix}challenge the coward?!`)
-            }
-            else {
-                message.channel.send(`${message.author} must have a death wish!  Maybe consider taunting someone in particular next time eh?`)
-            }
-        },
         'git': () => {
             message.channel.send(`You can find the most recently updated code at https://github.com/Rynemgar/Gladiator-Bot`)
         },
         'help': () => {
             message.channel.send ("*Challenge* = Challenge another user to a duel of sorts!, *Taunt* = Taunt another user. What are they? Scared?!, *Bow* = Prepare to fight your opponent in hand to hand combat!, *Shoot* = Nock your bow and arrow and see if you can take that smile off their face!")
+        },
+        'challenge': () => {
+            if (message.mentions.users.size === 0) {
+                switch (Math.floor((Math.random() * 6) + 1)) {
+                    case 1:
+                    message.channel.send(`${message.author}, must be drunk.  Who challenges nobody in particular?!`);
+                        break;
+                    case 2:
+                    message.reply(`stands around shouting random challenges into the wind... Who exactly do they have a problem with?!`);
+                        break;
+                    case 3:
+                    message.reply(`forgot to actually challenge someone... maybe it was just bravado?`);
+                        break;
+                    case 4:
+                    message.reply(`doesn't really understand this colosseum thing... A challenge requires TWO people... You... and your opponent! Yikes....`);
+                        break;
+                    case 5:
+                    message.reply(`attempted to challenge someone but got eaten by lions...`);
+                        break;
+                    case 6:
+                    message.reply(`tried to challenge someone but dropped their sword on their foot... bye bye toes...!`);
+                        break;
+                    default:
+                    message.reply("error");
+                }
+            } else if (message.mentions.users.first()) {
+                switch (Math.floor((Math.random() * 6) + 1)) {
+                    case 1:
+                    message.channel.send(`${member.user} You have been challenged to ritual combat by ${message.author}!  Proceed to the arena... If you dare!`);
+                        break;
+                    case 2:
+                    message.channel.send(`${member.user}!  You're being challenged to a good old fashioned fisty cuffs by ${message.author}. Better raise your weapon and come out swinging!`);
+                        break;
+                    case 3:
+                    message.reply(`is swinging his sword in your general direction ${message.mentions.users.first()}. Will you raise your shield or lose your head?`);
+                        break;
+                    case 4:
+                    message.reply(`kneels before the Gladiator Emporer asking if they can take the head of ${message.mentions.users.first()}, maybe you should pay attention oh mighty warrior!`);
+                        break;
+                    case 5:
+                    message.channel.send(`All the warriors of the mighty Kazha are gathered to watch as ${message.mentions.users.first()} is challenged to a fight to the death by ${message.author}!`);
+                        break;
+                    case 6:
+                    message.reply(`looks ferocious in his gladiator armour.  Perhaps ${message.mentions.users.first()} should prepare for the worst`);
+                        break;
+                    default:
+                    message.reply("error");
+                }
+            }   
+        },
+        'taunt': () => {
+            if (message.mentions.users.size === 0) {
+                switch (Math.floor((Math.random() * 6) + 1)) {
+                    case 1:
+                    message.channel.send(`${message.author} must have a death wish!  Maybe consider taunting someone in particular next time eh?`);
+                        break;
+                    case 2:
+                    message.reply(`stands around shouting random insults into the wind... Who are they talking to?!`);
+                        break;
+                    case 3:
+                    message.reply(`looks around meanacingly whilst everyone wonders what their problem is`);
+                        break;
+                    case 4:
+                    message.reply(`is standing around muttering to themselves... I think there is something wrong with them...`);
+                        break;
+                    case 5:
+                    message.reply(`you forgot to tag someone.  You're not very good at this colosseum thing are you...?`);
+                        break;
+                    case 6:
+                    message.reply(`perhaps you need to learn how to taunt AT someone next time?`);
+                        break;
+                    default:
+                    message.reply("error");
+                }
+            } else if (message.mentions.users.first()) {
+                switch (Math.floor((Math.random() * 6) + 1)) {
+                    case 1:
+                    message.reply(`is taunting you ${message.mentions.users.first()}! Will you stand for that or *challenge the coward?!`);
+                        break;
+                    case 2:
+                    message.channel.send(`Hey ${member.user}!  You hear that!? ${message.author} says Yo mama's so fat she's got her own gravity field!`);
+                        break;
+                    case 3:
+                    message.reply(`wants to know if ${message.mentions.users.first()} is ready to taste dirt`);
+                        break;
+                    case 4:
+                    message.channel.send(`Hey ${message.mentions.users.first()}, ${message.author} says you're so ugly, the mirror didn't just crack it exploded!`);
+                        break;
+                    case 5:
+                    message.reply(`looks at ${message.mentions.users.first()} and motions for them to bring it...! Things are about to get dicey!`);
+                        break;
+                    case 6:
+                    message.reply(`says ${message.mentions.users.first()} is too afraid to look at them, let alone start any trouble!`);
+                        break;
+                    default:
+                    message.reply("error");
+                }
+            }   
         },
         'bow': () => {
             if (message.mentions.users.size === 0) {
