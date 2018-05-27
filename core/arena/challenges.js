@@ -3,25 +3,31 @@ const arena = require('./arena');
 class Challenges {
   constructor() {
     this.challenges = [];
+    this.challengeDuration = 60000; // change this
+
+    setInterval(() => {
+      for (let i = 0; i <= this.challenges.length; i++) {
+        if (this.challenges[i].timestamp + this.challengeDuration > Date.now()) {
+          this.challenges.splice(i, 1);
+        }
+      }
+    }, 60000);
   }
 
   addChallenge(challenger, target) {
-    this.challenges.push({challenger, target});
+    this.challenges.push({challenger, target, timestamp: Date.now()});
   }
 
   acceptChallenge(user) {
     let found;
     let idx;
     for (const challenge of this.challenges) {
-      console.log('target', challenge.target);
-      console.log('user', user);
       if (challenge.target.id === user.id) {
         found = challenge;
         idx = this.challenges.indexOf(challenge);
         break;
       }
     }
-    console.log(found);
     if (found) {
       const fightStarted = arena.startFight(found.challenger, found.target);
       if (fightStarted) {
