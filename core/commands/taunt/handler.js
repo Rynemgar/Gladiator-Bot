@@ -4,7 +4,7 @@ const parseVariables = require('../../response-variables');
 
 class TauntCommand {
   constructor() {
-    this.cooldown = 30000;
+    this.cooldown = 5000;
   }
   handler(message) {
     if (this.lastUsed > Date.now() + this.cooldown) return;

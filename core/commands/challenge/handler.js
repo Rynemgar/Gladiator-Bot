@@ -4,7 +4,7 @@ const parseVariables = require('../../response-variables');
 
 class ChallengeCommand {
   constructor() {
-    this.cooldown = 30000;
+    this.cooldown = 5000;
   }
 
   handler(message) {
