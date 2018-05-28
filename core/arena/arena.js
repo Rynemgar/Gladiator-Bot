@@ -20,6 +20,10 @@ class Arena {
       legs: {
         chance: 0.80,
         damage: 10
+      },
+      lions: {
+        chance: 1,
+        damage: 1000
       }
     }
   }
