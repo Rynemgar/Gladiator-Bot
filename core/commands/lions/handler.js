@@ -26,6 +26,10 @@ class LionsCommand {
           // Handle miss
           message.channel.send(`${result.gladiator.userObject} swings at ${result.target.userObject} but they ducked out of the way. ${result.target.health}hp remaining!`);
           break;
+        case 'TURN':
+          // Handle out of turn
+          message.channel.send('How about you give your opponent a chance?  The fans don\' like one sided battles');
+          break;
         case 'NOT_GLADIATOR':
           // Handle not gladiator
           message.channel.send(`${message.author} is trying to get in on the action. GUARDS?!`);

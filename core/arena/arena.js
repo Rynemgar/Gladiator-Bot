@@ -72,14 +72,15 @@ class Arena {
                 target
               }
             }
-            } else {
+          } else {
+              message: 'TURN'
+            }
+          } else {
             return {
               message: 'NOT_GLADIATOR'
             }
           }
-          } else {
-            message.channel.send('How about you give your opponent a chance?  The fans don\' like one sided battles')
-        }
+          
       
 
   }
