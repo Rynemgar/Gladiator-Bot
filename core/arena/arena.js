@@ -73,8 +73,10 @@ class Arena {
               }
             }
           } else {
+            return {
               message: 'TURN'
             }
+          }
           } else {
             return {
               message: 'NOT_GLADIATOR'
