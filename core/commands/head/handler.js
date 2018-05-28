@@ -2,10 +2,10 @@ const arena = require('../../arena/arena');
 
 class HeadCommand {
   constructor() {
-    this.cooldown = 1000;
+    this.cooldown = 3000;
   }
   handler(message) {
-    if (this.lastUsed > Date.now() + this.cooldown) return;
+    if (this.lastUsed + this.cooldown > Date.now()) return;
 
     if (arena.inProgress) {
       const result = arena.attackHead(message.author);
