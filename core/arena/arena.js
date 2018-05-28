@@ -44,37 +44,43 @@ class Arena {
     const attacker = this._getGladiator(attackingUser);
     const target = attacker === this.gladiator1 ? this.gladiator2 : this.gladiator1;
     if (attacker && target) {
-      const roll = Math.random();
-      if (roll < attack.chance) {
-        target.damage(attack.damage);
-
-        if (target.health <= 0) {
-          this.inProgress = false;
-          this.gladiator1 = null;
-          this.gladiator2 = null;
-          return {
-            message: 'WIN',
-            winner: attacker,
-            loser: target
+        if (!this.lastAttacker || this.lastAttacker !== attacker.id) {
+            this.lastAttacker = attacker.id;
+            const roll = Math.random();
+            if (roll < attack.chance) {
+              target.damage(attack.damage);
+      
+              if (target.health <= 0) {
+                this.inProgress = false;
+                this.gladiator1 = null;
+                this.gladiator2 = null;
+                return {
+                  message: 'WIN',
+                  winner: attacker,
+                  loser: target
+                }
+              }
+              return {
+                message: 'HIT',
+                gladiator: attacker,
+                target
+              }
+            } else {
+              return {
+                message: 'MISS',
+                gladiator: attacker,
+                target
+              }
+            }
+            } else {
+            return {
+              message: 'NOT_GLADIATOR'
+            }
           }
+          } else {
+            message.channel.send('How about you give your opponent a chance?  The fans don\' like one sided battles')
         }
-        return {
-          message: 'HIT',
-          gladiator: attacker,
-          target
-        }
-      } else {
-        return {
-          message: 'MISS',
-          gladiator: attacker,
-          target
-        }
-      }
-    } else {
-      return {
-        message: 'NOT_GLADIATOR'
-      }
-    }
+      
 
   }
 
