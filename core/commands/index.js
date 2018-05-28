@@ -10,5 +10,5 @@ module.exports = {
   taunt: require('./taunt/handler'),
   body: require('./body/handler'),
   legs: require('./legs/handler'),
-  lions: require('/lions/handler')
+  lions: require('./lions/handler')
 };
