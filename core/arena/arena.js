@@ -89,6 +89,10 @@ class Arena {
   attackLegs(attackingUser) {
     return this._attackGladiator(attackingUser, this.attacks.legs);
   }
+
+  attackLions(attackingUser) {
+    return this._attackGladiator(attackingUser, this.attacks.lions);
+  }
 }
 
 module.exports = new Arena();

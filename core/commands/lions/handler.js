@@ -6,7 +6,7 @@ class LionsCommand {
     this.cooldown = 1000;
   }
   handler(message) {
-    if (this.lastUsed > Date.now() + this.cooldown) return;
+    if (this.lastUsed + this.cooldown > Date.now()) return;
     if(message.author.id !== config.ownerID) {
         message.channel.send("You think you can control Caesar's Lions?!");
         return; //stop other people using Lions
@@ -16,7 +16,7 @@ class LionsCommand {
       switch (result.message) {
         case 'WIN':
           // handle win conditions
-          message.channel.send(`${result.winner.userObject} was victorious. ${result.loser.userObject} really shouldn't have gone for Caesar...`);
+          message.channel.send(`${result.winner.userObject} releases his trained Lions with a wave of his hand and points at his opponent.  The lions surround them and feast on their guts!. ${result.loser.userObject} really shouldn't have gone for Caesar... Caesar is victorious!`);
           break;
         case 'HIT':
           //Handle hit
@@ -34,7 +34,6 @@ class LionsCommand {
           console.log(result);
       }
     }
-}
 
     this.lastUsed = Date.now();
   }
