@@ -10,15 +10,15 @@ class Arena {
 
     this.attacks = {
       head: {
-        chance: 0.2,
+        chance: 0.1,
         damage: 50
       },
       body: {
-        chance: 0.5,
+        chance: 0.33,
         damage: 30
       },
       legs: {
-        chance: 0.9,
+        chance: 0.80,
         damage: 10
       }
     }
