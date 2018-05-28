@@ -7,5 +7,7 @@ module.exports = {
   head: require('./head/handler'),
   prefix: require('./prefix/handler'),
   shoot: require('./shoot/handler'),
-  taunt: require('./taunt/handler')
+  taunt: require('./taunt/handler'),
+  body: require('./body/handler'),
+  legs: require('./legs/handler')
 };

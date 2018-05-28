@@ -1,6 +1,6 @@
 const arena = require('../../arena/arena');
 
-class BodyCommand {
+class legsCommand {
   constructor() {
     this.cooldown = 1000;
   }
@@ -8,7 +8,7 @@ class BodyCommand {
     if (this.lastUsed > Date.now() + this.cooldown) return;
 
     if (arena.inProgress) {
-      const result = arena.attackBody(message.author);
+      const result = arena.attackLegs(message.author);
       switch (result.message) {
         case 'WIN':
           // handle win conditions
@@ -16,7 +16,7 @@ class BodyCommand {
           break;
         case 'HIT':
           //Handle hit
-          message.channel.send(`${result.gladiator.userObject} lands a gut shot to the body of ${result.target.userObject}. ${result.target.health}hp remaining!`);
+          message.channel.send(`${result.gladiator.userObject} lands a glancing slice to the legs of ${result.target.userObject}. ${result.target.health}hp remaining!`);
           break;
         case 'MISS':
           // Handle miss
@@ -35,4 +35,4 @@ class BodyCommand {
   }
 }
 
-module.exports = new BodyCommand();
+module.exports = new legsCommand();

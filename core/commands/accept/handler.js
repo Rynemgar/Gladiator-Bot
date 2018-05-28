@@ -12,11 +12,11 @@ class AcceptCommand {
     const challenge = challenges.acceptChallenge(message.author);
 
     if (challenge.success) {
-      message.channel.send(`${challenge.data.challenger} and ${challenge.data.target} step into the arena.`);
+      message.channel.send(`${challenge.data.challenger} and ${challenge.data.target} step into the arena.  Use the commands *head *body or *legs to attack your opponent!`);
     } else {
       // could handle challenge.message responses here if desired. could get spammy though
       console.log(challenge);
-      message.channel.send(`it broke...`)
+      message.channel.send(`You can't accept that challenge!  I will release the lions if you aren't careful!`)
     }
 
     this.lastUsed = Date.now();
