@@ -1,4 +1,5 @@
 const arena = require('../../arena/arena');
+const config = require('../../../config.json');
 
 class LionsCommand {
   constructor() {
@@ -33,6 +34,7 @@ class LionsCommand {
           console.log(result);
       }
     }
+}
 
     this.lastUsed = Date.now();
   }
