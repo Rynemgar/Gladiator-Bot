@@ -9,6 +9,6 @@ module.exports = {
   shoot: require('./shoot/handler'),
   taunt: require('./taunt/handler'),
   body: require('./body/handler'),
-  legs: require('./legs/handler')
+  legs: require('./legs/handler'),
   lions: require('/lions/handler')
 };
