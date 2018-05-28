@@ -10,6 +10,7 @@ class ChallengeCommand {
   }
 
   handler(message) {
+    message.delete(1000);
     if(arena.inProgress === true) return;
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
