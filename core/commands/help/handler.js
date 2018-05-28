@@ -1,8 +1,9 @@
 class HelpCommand {
   constructor() {
-    this.cooldown = 0;
+    this.cooldown = 20000;
   }
   handler(message) {
+    if (this.lastUsed + this.cooldown > Date.now()) return;
     message.channel.send(`
 
     Fun Commands,
@@ -21,7 +22,9 @@ class HelpCommand {
 
     And may the odds be *ever* in your favour!
   `);
-  }
+  this.lastUsed = Date.now();
+}
+  
 }
 
 module.exports = new HelpCommand();

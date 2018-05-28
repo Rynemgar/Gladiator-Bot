@@ -20,7 +20,7 @@ class legsCommand {
           break;
         case 'MISS':
           // Handle miss
-          message.channel.send(`${result.gladiator.userObject} swings at ${result.target.userObject} but they ducked out of the way. ${result.target.health}hp remaining!`);
+          message.channel.send(`${result.gladiator.userObject} swings at ${result.target.userObject} but they rolled out of the way at the last moment. ${result.target.health}hp remaining!`);
           break;
         case 'NOT_GLADIATOR':
           // Handle not gladiator

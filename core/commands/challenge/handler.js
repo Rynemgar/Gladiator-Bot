@@ -2,6 +2,7 @@ const responses = require('./responses');
 const randomElement = require('../../../utils/get-random-element');
 const parseVariables = require('../../response-variables');
 const challenges = require('../../arena/challenges');
+const arena = require('../../arena/arena')
 
 class ChallengeCommand {
   constructor() {
@@ -9,6 +10,7 @@ class ChallengeCommand {
   }
 
   handler(message) {
+    if(arena.inProgress === true) return;
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
     const mention = message.mentions.users.size > 0;

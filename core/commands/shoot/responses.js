@@ -3,7 +3,7 @@ module.exports.noMention = [
   '%author% you attempted to shoot yourself but you\'re lucky! You live!',
   '%author% you tried to shoot yourself but you missed and shot your friend... oops!',
   '%author% you shot yourself but managed to live. Though you\'ll forever have a scar',
-  'Woop woop! As %author% tries to shoot themself the police storm in and shoots the gun out of their hand!',
+  'Woop woop! As %author% tries to shoot themself the guards storm in and take the bow out of their hand!',
   '%author% you shot yourself, Idiot... You died!'
 ];
 module.exports.mention = [
@@ -11,6 +11,6 @@ module.exports.mention = [
   '%author% shoots %targetUser% and misses completely!',
   '%author% shoots %targetUser%.  Right between the legs!  OOOOOH!',
   '%author% shoots %targetUser% and misses by a mile!',
-  '%author% attempts to shoot %targetUser% but is out of bullets',
+  '%author% attempts to shoot %targetUser% but is out of arrows',
   '%author% shoots %targetUser%!  Headshot! Boo Ya!'
 ];
