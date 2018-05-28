@@ -6,6 +6,7 @@ class LionsCommand {
     this.cooldown = 1000;
   }
   handler(message) {
+    message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
     if(message.author.id !== config.ownerID) {
         message.channel.send("You think you can control Caesar's Lions?!");

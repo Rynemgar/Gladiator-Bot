@@ -5,6 +5,7 @@ class HeadCommand {
     this.cooldown = 0;
   }
   handler(message) {
+    message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
     if (arena.inProgress) {

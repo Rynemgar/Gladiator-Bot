@@ -7,6 +7,7 @@ class ShootCommand {
     this.cooldown = 5000;
   }
   handler(message) {
+    message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
     const mention = message.mentions.users.size > 0;
