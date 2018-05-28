@@ -6,11 +6,11 @@ class LionsCommand {
     this.cooldown = 1000;
   }
   handler(message) {
+    if (this.lastUsed > Date.now() + this.cooldown) return;
     if(message.author.id !== config.ownerID) {
         message.channel.send("You think you can control Caesar's Lions?!");
         return; //stop other people using Lions
-    if (this.lastUsed > Date.now() + this.cooldown) return;
-
+    }
     if (arena.inProgress) {
       const result = arena.attackLions(message.author);
       switch (result.message) {
