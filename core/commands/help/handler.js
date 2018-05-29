@@ -16,7 +16,7 @@ class HelpCommand {
     *Challenge* = Challenge another user to a duel of sorts!,
     *Accept* = accepts the challenge issued,
 
-    Attack Commands, (Attacks have a 3 second cooldown - This will become turn based in future)
+    Attack Commands, (Attacks will only work if you are in combat - Combat is turn based)
     *Head* = Has a 10% chance of inflicting 50 damage to your opponent,
     *Body* = Has a 33% chance of inflicting 30 damage to your opponent,
     *Legs* = has a 80% chance of inflicting 10 damage to your opponent,
