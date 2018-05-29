@@ -11,7 +11,7 @@ class Challenges {
           this.challenges.splice(i, 1);
         }
       }
-    }, 60000);
+    }, 120000);
   }
 
   addChallenge(challenger, target) {

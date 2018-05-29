@@ -4,7 +4,7 @@ const challenges = require('../../arena/challenges');
 
 class AcceptCommand {
   constructor() {
-    this.cooldown = 1000;
+    this.cooldown = 120000;
   }
   handler(message) {
     message.delete(1000);
