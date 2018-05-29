@@ -17,7 +17,7 @@ class AcceptCommand {
     } else {
       // could handle challenge.message responses here if desired. could get spammy though
       console.log(challenge);
-      message.channel.send(`You can't accept that challenge!  I will release the lions if you aren't careful!`)
+      message.channel.send(`You can't accept that challenge right now.  Either you weren't challenged or a battle is already ongoing`)
     }
 
     this.lastUsed = Date.now();

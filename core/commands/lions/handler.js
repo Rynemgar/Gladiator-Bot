@@ -9,7 +9,7 @@ class LionsCommand {
     message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
     if(message.author.id !== config.ownerID) {
-        message.channel.send("You think you can control Caesar's Lions?!");
+        message.channel.send(`You think you can control Caesar's Lions ${message.author}?!`);
         return; //stop other people using Lions
     }
     if (arena.inProgress) {

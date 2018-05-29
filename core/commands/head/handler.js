@@ -25,7 +25,7 @@ class HeadCommand {
           break;
         case 'TURN':
           // Handle out of turn
-          message.channel.send('How about you give your opponent a chance?  The fans don\' like one sided battles');
+          message.channel.send('How about you give your opponent a chance?  The fans don\'t like one sided battles');
           break;
         case 'NOT_GLADIATOR':
           // Handle not gladiator
