@@ -16,7 +16,7 @@ class ChallengeCommand {
       message.channel.send(`${message.author} there is already a battle in progress.  Please wait for it to finish before issuing your challenge`);
       return;
     }
-    if(message.author.id === target.id) {
+    if (target && message.author.id === target.id) {
       message.channel.send(`${message.author} if you want to fall on your own sword, please do it elsewhere`);
     return;
     }
