@@ -11,8 +11,8 @@ class ChallengeCommand {
 
   handler(message) {
     message.delete(1000);
-    if(arena.inProgress === true) return;
-    if (this.lastUsed + this.cooldown > Date.now()) return;
+    const target = message.mentions.users.first();
+    if(arena.inProgress === true || message.author.id === target.id || this.lastUsed + this.cooldown > Date.now()) return;
 
     const mention = message.mentions.users.size > 0;
     let response = randomElement(responses[mention ? 'mention' : 'noMention']);
