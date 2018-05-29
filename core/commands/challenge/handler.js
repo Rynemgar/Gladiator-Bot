@@ -12,7 +12,15 @@ class ChallengeCommand {
   handler(message) {
     message.delete(1000);
     const target = message.mentions.users.first();
-    if(arena.inProgress === true || message.author.id === target.id || this.lastUsed + this.cooldown > Date.now()) return;
+    if (arena.inProgress === true) {
+      message.channel.send(`${message.author} there is already a battle in progress.  Please wait for it to finish before issuing your challenge`);
+      return;
+    }
+    if(message.author.id === target.id) {
+      message.channel.send(`${message.author} if you want to fall on your own sword, please do it elsewhere`);
+    return;
+    }
+    if (this.lastUsed + this.cooldown > Date.now()) return;
 
     const mention = message.mentions.users.size > 0;
     let response = randomElement(responses[mention ? 'mention' : 'noMention']);
