@@ -115,6 +115,7 @@ class Arena {
               \`Level\` = Level + 1
             WHERE \`UserId\` = ${winner.id};
           `;
+          message.channel.send(`${winner.id} you have levelled up! DING!`);
         } else {
           query = `
             UPDATE \`GladiatorBot\`.\`Levels\` 
