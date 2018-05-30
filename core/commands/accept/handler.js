@@ -1,6 +1,7 @@
 const randomElement = require('../../../utils/get-random-element');
 const parseVariables = require('../../response-variables');
 const challenges = require('../../arena/challenges');
+const querySql = require('../../../connection.js');
 
 class AcceptCommand {
   constructor() {
@@ -8,6 +9,7 @@ class AcceptCommand {
   }
   handler(message) {
     message.delete(1000);
+    querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`).catch(console.error);
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
     const challenge = challenges.acceptChallenge(message.author);

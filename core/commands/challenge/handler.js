@@ -2,7 +2,8 @@ const responses = require('./responses');
 const randomElement = require('../../../utils/get-random-element');
 const parseVariables = require('../../response-variables');
 const challenges = require('../../arena/challenges');
-const arena = require('../../arena/arena')
+const arena = require('../../arena/arena');
+const querySql = require('../../../connection.js');
 
 class ChallengeCommand {
   constructor() {
@@ -11,6 +12,7 @@ class ChallengeCommand {
 
   handler(message) {
     message.delete(1000);
+    querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`).catch(console.error);
     const target = message.mentions.users.first();
     if (arena.inProgress === true) {
       message.channel.send(`${message.author} there is already a battle in progress.  Please wait for it to finish before issuing your challenge`);

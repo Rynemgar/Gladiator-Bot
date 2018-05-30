@@ -1,4 +1,5 @@
 const Gladiator = require('./gladiator');
+const querySql = require('../../connection');
 
 class Arena {
   constructor() {
@@ -25,7 +26,14 @@ class Arena {
         chance: 1,
         damage: 1000
       }
-    }
+    };
+
+    this.arenaExpirationTime = 60000;
+    setInterval(() => {
+      if (this.lastAttacker && this.lastAttacker.timestamp + this.arenaExpirationTime < Date.now()) {
+        this.expireArena();
+      }
+    }, 1000);
   }
 
   startFight(gladiator1, gladiator2) {
@@ -44,47 +52,89 @@ class Arena {
     const attacker = this._getGladiator(attackingUser);
     const target = attacker === this.gladiator1 ? this.gladiator2 : this.gladiator1;
     if (attacker && target) {
-        if (!this.lastAttacker || this.lastAttacker !== attacker.id) {
-            this.lastAttacker = attacker.id;
-            const roll = Math.random();
-            if (roll < attack.chance) {
-              target.damage(attack.damage);
-      
-              if (target.health <= 0) {
-                this.inProgress = false;
-                this.gladiator1 = null;
-                this.gladiator2 = null;
-                return {
-                  message: 'WIN',
-                  winner: attacker,
-                  loser: target
-                }
-              }
-              return {
-                message: 'HIT',
-                gladiator: attacker,
-                target
-              }
-            } else {
-              return {
-                message: 'MISS',
-                gladiator: attacker,
-                target
-              }
-            }
-          } else {
-            return {
-              message: 'TURN'
-            }
-          }
-          } else {
-            return {
-              message: 'NOT_GLADIATOR'
-            }
-          }
-          
-      
+      if (!this.lastAttacker || this.lastAttacker.user.id !== attacker.id) {
+        this.lastAttacker = {
+          user: attacker,
+          timestamp: Date.now()
+        };
+        const roll = Math.random();
+        if (roll < attack.chance) {
+          target.damage(attack.damage);
 
+          if (target.health <= 0) {
+            this.inProgress = false;
+            this.gladiator1 = null;
+            this.gladiator2 = null;
+            return this.endArena(attacker, target);
+          }
+          return {
+            message: 'HIT',
+            gladiator: attacker,
+            target
+          }
+        } else {
+          return {
+            message: 'MISS',
+            gladiator: attacker,
+            target
+          }
+        }
+      } else {
+        return {
+          message: 'TURN'
+        }
+      }
+    } else {
+      return {
+        message: 'NOT_GLADIATOR'
+      }
+    }
+  }
+
+  expireArena() {
+    this.inProgress = false;
+    this.gladiator1 = null;
+    this.gladiator2 = null;
+    // send message would require a bit of a rework of the arena, so this is silent for now.
+  }
+
+  endArena(winner, loser) {
+    querySql(`
+      SELECT Experience 
+      FROM Levels 
+      WHERE UserID = ${winner.id}
+    `)
+      .then((results) => {
+        const xp = results[ 0 ].Experience;
+        const awardedXp = 50;
+        let query;
+        if (xp + awardedXp > 100) {
+          query = `
+            UPDATE \`GladiatorBot\`.\`Levels\` 
+            SET \`Experience\` = 0,
+              \`Level\` = Level + 1
+            WHERE \`UserId\` = ${winner.id};
+          `;
+        } else {
+          query = `
+            UPDATE \`GladiatorBot\`.\`Levels\` 
+            SET \`Experience\` = Experience + ${awardedXp} 
+            WHERE \`UserId\` = ${winner.id};
+           `;
+        }
+        return querySql(query)
+      })
+      .then(() => {
+        console.log(`Updated ${winner.userObject.name}`);
+      })
+      .catch(console.error);
+
+
+    return {
+      message: 'WIN',
+      winner,
+      loser
+    }
   }
 
   attackHead(attackingUser) {
