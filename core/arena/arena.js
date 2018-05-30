@@ -109,7 +109,7 @@ class Arena {
     `)
       .then((results) => {
         const xp = results[ 0 ].Experience;
-        const awardedXp = 50;
+        const awardedXp = 20;
         let query;
         if (xp + awardedXp > 100) {
           query = `
