@@ -128,7 +128,7 @@ class Arena {
         return querySql(query)
       })
       .then(() => {
-        console.log(`Updated ${winner.userObject.name}`);
+        console.log(`Updated ${winner.id}`);
       })
       .catch(console.error);
 
