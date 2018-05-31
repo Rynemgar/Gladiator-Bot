@@ -11,21 +11,23 @@ class LevelCommand {
 
   handler(message) {
     message.delete(1000);
-    querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`).catch(console.error);
-    querySql(`
-      SELECT Level 
-      FROM Levels 
-      WHERE UserID = ${message.author.id}
-    `)
+    querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`)
+      .then(() => querySql(`
+        SELECT Level 
+        FROM Levels 
+        WHERE UserID = ${message.author.id}
+      `))
+
       .then((results) => {
-        const level = results[0].Level;
+        const level = results[0] ? results[ 0 ].Level : 0;
         message.channel.send(`You are currently Level ${level}`);
-      });
-    
+      })
+      .catch(console.error);
+
+
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
-       
-    
+
     this.lastUsed = Date.now();
   }
 }

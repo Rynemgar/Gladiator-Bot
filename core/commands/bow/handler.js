@@ -8,7 +8,13 @@ class BowCommand {
   }
   handler(message) {
     message.delete(1000);
+    const target = message.mentions.users.first();
     if (this.lastUsed + this.cooldown > Date.now()) return;
+
+    if (target && message.author.id === target.id) {
+      message.channel.send(`${message.author} how do you even bow to yourself?`);
+    return;
+    }
 
     const mention = message.mentions.users.size > 0;
     let response = randomElement(responses[mention ? 'mention' : 'noMention']);
