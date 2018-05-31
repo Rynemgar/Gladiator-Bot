@@ -1,5 +1,6 @@
 const Gladiator = require('./gladiator');
 const querySql = require('../../connection');
+const client = require('../client');
 
 class Arena {
   constructor() {
@@ -28,6 +29,13 @@ class Arena {
         damage: 1000
       }
     };
+    if (client.readyAt) {
+      this.getColosseum();
+    } else {
+      client.on('ready', () => {
+        this.getColosseum();
+      })
+    }
 
     this.arenaExpirationTime = 60000;
     setInterval(() => {
@@ -35,6 +43,11 @@ class Arena {
         this.expireArena();
       }
     }, 1000);
+  }
+
+  getColosseum() {
+    const server = client.guilds.first();
+    this.colosseum = server.channels.find('name', 'colosseum');
   }
 
   startFight(gladiator1, gladiator2) {
@@ -94,16 +107,18 @@ class Arena {
   }
 
   expireArena() {
+    this.colosseum.send(`I guess ${this.gladiator1.userObject} and ${this.gladiator2.userObject} fell asleep?... Arena expired`);
     this.inProgress = false;
     this.lastAttacker = null;
     this.gladiator1 = null;
     this.gladiator2 = null;
-    // send message would require a bit of a rework of the arena, so this is silent for now.
   }
 
   endArena(winner, loser) {
     querySql(`
-      SELECT Experience 
+      SELECT 
+        Experience,
+        Level 
       FROM Levels 
       WHERE UserID = ${winner.id}
     `)
@@ -118,12 +133,14 @@ class Arena {
               \`Level\` = Level + 1
             WHERE \`UserId\` = ${winner.id};
           `;
+          this.colosseum.send(`${winner.userObject} is now level ${results[0].Level + 1}!`);
         } else {
           query = `
             UPDATE \`GladiatorBot\`.\`Levels\` 
             SET \`Experience\` = Experience + ${awardedXp} 
             WHERE \`UserId\` = ${winner.id};
            `;
+          this.colosseum.send(`${winner.userObject} is only ${100 - (xp + 20)}xp from reaching level ${results[0].Level + 1}!`);
         }
         return querySql(query)
       })
