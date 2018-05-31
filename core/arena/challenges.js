@@ -1,4 +1,5 @@
 const arena = require('./arena');
+const colosseum = require('../colosseum');
 
 class Challenges {
   constructor() {
@@ -8,6 +9,7 @@ class Challenges {
     setInterval(() => {
       for (let i = 0; i <= this.challenges.length; i++) {
         if (this.challenges[i] && this.challenges[i].timestamp + this.challengeDuration > Date.now()) {
+          colosseum.send(`${this.challenges[i].challenger}'s challenge falls on deaf ears. Challenge Expired!`);
           this.challenges.splice(i, 1);
         }
       }
