@@ -7,14 +7,16 @@ class HelpCommand {
     if (this.lastUsed + this.cooldown > Date.now()) return;
     message.channel.send(`
 
-    Fun Commands,
+    Commands,
     *Taunt* = Taunt another user. What are they? Scared?!, 
     *Bow* = Prepare to fight your opponent in hand to hand combat!, 
     *Shoot* = Nock your bow and arrow and see if you can take that smile off their face!,
+    *Level* = Reports your current Level,
 
     Battle Commands,
     *Challenge* = Challenge another user to a duel of sorts!,
     *Accept* = accepts the challenge issued,
+    *Spectate* = announce who is currently battling,
 
     Attack Commands, (Attacks will only work if you are in combat - Combat is turn based)
     *Head* = Has a 10% chance of inflicting 50 damage to your opponent,

@@ -20,7 +20,7 @@ class LevelCommand {
 
       .then((results) => {
         const level = results[0] ? results[ 0 ].Level : 0;
-        message.channel.send(`You are currently Level ${level}`);
+        message.reply(`You are currently Level ${level}`);
       })
       .catch(console.error);
 
