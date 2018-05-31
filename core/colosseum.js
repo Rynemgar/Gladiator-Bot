@@ -18,8 +18,8 @@ class Colosseum {
     this.channel = server.channels.find('name', 'colosseum');
   }
 
-  send() {
-    this.channel.send(arguments);
+  send(message) {
+    this.channel.send(message);
   }
 }
 
