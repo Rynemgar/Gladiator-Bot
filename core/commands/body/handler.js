@@ -5,7 +5,7 @@ class BodyCommand {
     this.cooldown = 0;
   }
   handler(message) {
-    message.delete(5000);
+    message.delete(7500);
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
     if (arena.inProgress) {
