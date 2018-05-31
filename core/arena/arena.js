@@ -4,7 +4,7 @@ const querySql = require('../../connection');
 class Arena {
   constructor() {
     this.inProgress = false;
-    this.lastAttack = false;
+    this.lastAttacker = false;
 
     this.baseGladiatorStats = {
       health: 100
@@ -64,7 +64,7 @@ class Arena {
 
           if (target.health <= 0) {
             this.inProgress = false;
-            this.lastAttack = null;
+            this.lastAttacker = null;
             this.gladiator1 = null;
             this.gladiator2 = null;
             return this.endArena(attacker, target);
@@ -95,7 +95,7 @@ class Arena {
 
   expireArena() {
     this.inProgress = false;
-    this.lastAttack = null;
+    this.lastAttacker = null;
     this.gladiator1 = null;
     this.gladiator2 = null;
     // send message would require a bit of a rework of the arena, so this is silent for now.

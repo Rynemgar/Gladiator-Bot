@@ -5,7 +5,7 @@ const querySql = require('../../../connection.js');
 
 class AcceptCommand {
   constructor() {
-    this.cooldown = 30000;
+    this.cooldown = 10000;
   }
   handler(message) {
     message.delete(1000);
