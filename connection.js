@@ -6,7 +6,7 @@ const pool = mysql.createPool({
         password: process.env.MYSQL_PASS,
         port: process.env.MYSQL_PORT,
         database: process.env.MYSQL_DB,
-        multipleStatements = true
+        multipleStatements: true
 });
 
 // reconnect stuff
