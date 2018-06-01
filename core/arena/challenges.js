@@ -9,7 +9,7 @@ class Challenges {
     setInterval(() => {
       for (let i = 0; i <= this.challenges.length; i++) {
         if (this.challenges[i] && this.challenges[i].timestamp + this.challengeDuration > Date.now()) {
-          const challenge = this.challenges.splice(i,1);
+          const challenge = this.challenges.splice(i,1)[0];
           console.log('cancelling challenge', challenge);
           colosseum.send(`${challenge.challenger}'s challenge falls on deaf ears. Challenge Expired!`);
         }

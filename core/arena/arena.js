@@ -108,7 +108,8 @@ class Arena {
       SELECT 
         Experience,
         Level,
-        Wins 
+        Wins,
+        Losses 
       FROM Levels 
       WHERE UserID = ${winner.id}
     `)
@@ -117,20 +118,18 @@ class Arena {
         const awardedXp = 20;
         let query;
         if (xp + awardedXp > 99) {
-          querySql(`
-            UPDATE \`GladiatorBot\`.\`Levels\` 
-            SET \`Experience\` = 0,
-              \`Level\` = Level + 1,
-              \`Wins\` = Wins + 1
-            WHERE \`UserId\` = ${winner.id};
-          `)
-          .then(() => {
-          querySql(`
-            UPDATE \`GladiatorBot\`.\`Levels\`
-            SET \`Losses\` = Losses + 1
-            Where \`UserId\` = ${loser.id};
-            `)
-            colosseum.send(`${winner.userObject} is now level ${results[0].Level + 1}!`)});
+          query = `
+           UPDATE \`GladiatorBot\`.\`Levels\` 
+           SET \`Experience\` = 0,
+               \`Level\` = Level + 1,
+               \`Wins\` = Wins + 1
+           WHERE \`UserId\` = ${winner.id};
+
+           UPDATE \`GladiatorBot\`.\`Levels\`
+           SET \`Losses\` = Losses + 1
+           WHERE \`UserId\` = ${loser.id};
+            `;
+            colosseum.send(`${winner.userObject} is now level ${results[0].Level + 1}!`)
         } else {
           query = `
             UPDATE \`GladiatorBot\`.\`Levels\` 
