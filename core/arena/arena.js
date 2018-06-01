@@ -136,6 +136,20 @@ class Arena {
       .then(() => {
         console.log(`Updated ${winner.id}`);
       })
+      .then(() => {
+        query = `
+            UPDATE \`GladiatorBot\`.\`Levels\` 
+            SET \`Wins\` = Wins + 1,
+            WHERE \`UserId\` = ${winner.id};
+          `;
+      })
+      .then(() => {
+        query = `
+            UPDATE \`GladiatorBot\`.\`Levels\` 
+            SET \`Losses\` = Losses + 1,
+            WHERE \`UserId\` = ${loser.id};
+          `;
+      })
       .catch(console.error);
 
 
