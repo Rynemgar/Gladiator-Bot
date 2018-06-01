@@ -115,7 +115,7 @@ class Arena {
         const xp = results[ 0 ].Experience;
         const awardedXp = 20;
         let query;
-        if (xp + awardedXp > 100) {
+        if (xp + awardedXp > 99) {
           query = `
             UPDATE \`GladiatorBot\`.\`Levels\` 
             SET \`Experience\` = 0,
