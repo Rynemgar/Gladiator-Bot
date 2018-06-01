@@ -133,9 +133,14 @@ class Arena {
         } else {
           query = `
             UPDATE \`GladiatorBot\`.\`Levels\` 
-            SET \`Experience\` = Experience + ${awardedXp} 
+            SET \`Experience\` = Experience + ${awardedXp},
+                \`Wins\` = Wins + 1
             WHERE \`UserId\` = ${winner.id};
-           `;
+
+            UPDATE \`GladiatorBot\`.\`Levels\`
+            SET \`Losses\` = Losses + 1
+            WHERE \`UserId\` = ${loser.id};
+              `;
           colosseum.send(`${winner.userObject} is only ${100 - (xp + 20)}xp from reaching level ${results[0].Level + 1}!`);
         }
         return querySql(query)
