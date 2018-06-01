@@ -119,9 +119,15 @@ class Arena {
           query = `
             UPDATE \`GladiatorBot\`.\`Levels\` 
             SET \`Experience\` = 0,
-              \`Level\` = Level + 1
+              \`Level\` = Level + 1,
+              \`Wins\` = Wins + 1
             WHERE \`UserId\` = ${winner.id};
           `;
+          query = `
+            UPDATE \`GladiatorBot\`.\`Levels\`
+            SET \`Losses\` = Losses + 1
+            Where \`UserId\` = ${loser.id};
+            `;
           colosseum.send(`${winner.userObject} is now level ${results[0].Level + 1}!`);
         } else {
           query = `
@@ -135,20 +141,6 @@ class Arena {
       })
       .then(() => {
         console.log(`Updated ${winner.id}`);
-      })
-      .then(() => {
-        querySql(`
-            UPDATE \`GladiatorBot\`.\`Levels\` 
-            SET \`Wins\` = Wins + 1,
-            WHERE \`UserId\` = ${winner.id};
-          `)
-      })
-      .then(() => {
-        querySql(`
-            UPDATE \`GladiatorBot\`.\`Levels\` 
-            SET \`Losses\` = Losses + 1,
-            WHERE \`UserId\` = ${loser.id};
-          `)
       })
       .catch(console.error);
 
