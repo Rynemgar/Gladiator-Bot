@@ -131,26 +131,25 @@ class Arena {
            `;
           colosseum.send(`${winner.userObject} is only ${100 - (xp + 20)}xp from reaching level ${results[0].Level + 1}!`);
         }
-        
+        return querySql(query)
       })
       .then(() => {
         console.log(`Updated ${winner.id}`);
       })
       .then(() => {
-        query = `
+        querySql(`
             UPDATE \`GladiatorBot\`.\`Levels\` 
             SET \`Wins\` = Wins + 1,
             WHERE \`UserId\` = ${winner.id};
-          `;
+          `)
       })
       .then(() => {
-        query = `
+        querySql(`
             UPDATE \`GladiatorBot\`.\`Levels\` 
             SET \`Losses\` = Losses + 1,
             WHERE \`UserId\` = ${loser.id};
-          `;
+          `)
       })
-       return querySql(query)
       .catch(console.error);
 
 
