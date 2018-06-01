@@ -107,7 +107,8 @@ class Arena {
     querySql(`
       SELECT 
         Experience,
-        Level 
+        Level,
+        Wins 
       FROM Levels 
       WHERE UserID = ${winner.id}
     `)
