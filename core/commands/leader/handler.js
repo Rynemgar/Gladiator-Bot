@@ -24,5 +24,11 @@ class LevelCommand {
         })
     
     .catch(console.error);
+    if (this.lastUsed + this.cooldown > Date.now()) return;
+
+
+    this.lastUsed = Date.now();
   }
 }
+
+module.exports = new LevelCommand();
