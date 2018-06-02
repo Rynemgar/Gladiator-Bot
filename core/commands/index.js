@@ -12,5 +12,6 @@ module.exports = {
   legs: require('./legs/handler'),
   lions: require('./lions/handler'),
   level: require('./level/handler'),
-  spectate: require('./spectate/handler')
+  spectate: require('./spectate/handler'),
+  leader: require('./leader/handler')
 };
