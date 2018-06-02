@@ -20,7 +20,7 @@ class LevelCommand {
         LIMIT 10
   `)
         .then((results) => {
-            colosseum.send(`${results}`)
+            message.channel.send(`${results}`)
         })
     
     .catch(console.error);
