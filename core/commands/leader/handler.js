@@ -16,8 +16,8 @@ class LevelCommand {
                 Wins,
                 Losses 
         FROM Levels
-        LIMIT 10
         ORDER BY Wins DESC
+        LIMIT 10
   `)
         .then((results) => {
             colosseum.send(`${results}`)
