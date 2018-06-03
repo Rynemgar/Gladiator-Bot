@@ -15,7 +15,8 @@ class LevelCommand {
       .then(() => querySql(`
         SELECT Level,
               Wins,
-              Losses 
+              Losses,
+              Streak 
         FROM Levels 
         WHERE UserID = ${message.author.id}
       `))
@@ -24,7 +25,8 @@ class LevelCommand {
         const level = results[0] ? results[ 0 ].Level : 0;
         const wins = results[0] ? results[ 0 ].Wins : 0;
         const losses = results[0] ? results[ 0 ].Losses : 0;
-        message.reply(`You are currently Level ${level} with ${wins} wins and ${losses} losses!`);
+        const streak = results[0] ? results[ 0 ].Streak : 0;
+        message.reply(`You are currently Level ${level} with a winning streak of ${streak} and a total of ${wins} wins and ${losses} losses!`);
       })
       .catch(console.error);
 
