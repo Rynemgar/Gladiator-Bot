@@ -14,7 +14,7 @@ class Challenges {
           colosseum.send(`${challenge.challenger}'s challenge of ${challenge.target} falls on deaf ears. Challenge Expired!`);
         }
       }
-    }, 1000);
+    }, 60000);
   }
 
   addChallenge(challenger, target) {
