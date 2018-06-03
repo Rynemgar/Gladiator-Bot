@@ -1,5 +1,8 @@
-class HelpCommand {
+
+const MessageController = require('../message-controller');
+class HelpCommand extends MessageController {
   constructor() {
+    super();
     this.cooldown = 20000;
   }
   handler(message) {

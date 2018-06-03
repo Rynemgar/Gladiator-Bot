@@ -1,9 +1,12 @@
 const randomElement = require('../../../utils/get-random-element');
 const parseVariables = require('../../response-variables');
 const arena = require('../../arena/arena');
+const MessageController = require('../message-controller');
 
-class SpectateCommand {
+class SpectateCommand extends MessageController {
   constructor() {
+    super();
+    this.global = true;
     this.cooldown = 5000;
   }
   handler(message) {

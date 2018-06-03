@@ -4,9 +4,11 @@ const parseVariables = require('../../response-variables');
 const challenges = require('../../arena/challenges');
 const arena = require('../../arena/arena');
 const querySql = require('../../../connection.js');
+const MessageController = require('../message-controller');
 
-class ChallengeCommand {
+class ChallengeCommand extends MessageController {
   constructor() {
+    super();
     this.cooldown = 5000;
   }
 

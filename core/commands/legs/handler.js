@@ -1,7 +1,9 @@
 const arena = require('../../arena/arena');
+const MessageController = require('../message-controller');
 
-class legsCommand {
+class legsCommand extends MessageController {
   constructor() {
+    super();
     this.cooldown = 0;
   }
   handler(message) {

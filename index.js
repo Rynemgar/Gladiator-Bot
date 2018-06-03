@@ -7,4 +7,4 @@ const messageHandler = require('./core/message-handler');
 client.on('message', messageHandler);
 
 
-client.login(process.env.DISCORD_TOKEN);
+client.login(process.env.NODE_ENV === 'beta' ? process.env.DISCORD_BETA_TOKEN : process.env.DISCORD_TOKEN);

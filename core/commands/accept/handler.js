@@ -2,9 +2,11 @@ const randomElement = require('../../../utils/get-random-element');
 const parseVariables = require('../../response-variables');
 const challenges = require('../../arena/challenges');
 const querySql = require('../../../connection.js');
+const MessageController = require('../message-controller');
 
-class AcceptCommand {
+class AcceptCommand extends MessageController {
   constructor() {
+    super();
     this.cooldown = 1000;
   }
   handler(message) {

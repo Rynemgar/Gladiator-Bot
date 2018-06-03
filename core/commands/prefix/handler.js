@@ -1,8 +1,10 @@
 const config = require('../../../config');
 const fs = require('fs');
+const MessageController = require('../message-controller');
 
-class PrefixCommand {
+class PrefixCommand extends MessageController {
   constructor() {
+    super();
     this.cooldown = 0;
   }
   handler(message) {

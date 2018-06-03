@@ -1,8 +1,10 @@
 const arena = require('../../arena/arena');
 const config = require('../../../config.json');
+const MessageController = require('../message-controller');
 
-class LionsCommand {
+class LionsCommand extends MessageController {
   constructor() {
+    super();
     this.cooldown = 1000;
   }
   handler(message) {

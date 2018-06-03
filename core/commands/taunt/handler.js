@@ -1,9 +1,11 @@
 const responses = require('./responses');
 const randomElement = require('../../../utils/get-random-element');
 const parseVariables = require('../../response-variables');
+const MessageController = require('../message-controller');
 
-class TauntCommand {
+class TauntCommand extends MessageController  {
   constructor() {
+    super();
     this.cooldown = 5000;
   }
   handler(message) {
