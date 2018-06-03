@@ -13,5 +13,6 @@ module.exports = {
   lions: require('./lions/handler'),
   level: require('./level/handler'),
   spectate: require('./spectate/handler'),
-  leader: require('./leader/handler')
+  leader: require('./leader/handler'),
+  messageSweep: require('./messagesweep/handler')
 };
