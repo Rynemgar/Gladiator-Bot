@@ -15,6 +15,8 @@ class ChallengeCommand extends MessageController {
   handler(message) {
     message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
+    this.lastUsed = Date.now();
+
     querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`).catch(console.error);
     const target = message.mentions.users.first();
     if (arena.inProgress === true) {
@@ -34,8 +36,6 @@ class ChallengeCommand extends MessageController {
     if (mention) {
       challenges.addChallenge(message.author, message.mentions.users.first());
     }
-
-    this.lastUsed = Date.now();
   }
 }
 
