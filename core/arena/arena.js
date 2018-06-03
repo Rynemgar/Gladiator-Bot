@@ -122,11 +122,13 @@ class Arena {
            UPDATE \`GladiatorBot\`.\`Levels\` 
            SET \`Experience\` = 0,
                \`Level\` = Level + 1,
-               \`Wins\` = Wins + 1
+               \`Wins\` = Wins + 1,
+               \`Streak\` = Streak + 1
            WHERE \`UserId\` = ${winner.id};
 
            UPDATE \`GladiatorBot\`.\`Levels\`
-           SET \`Losses\` = Losses + 1
+           SET \`Losses\` = Losses + 1,
+               \`Streak\` = Streak = 0
            WHERE \`UserId\` = ${loser.id};
             `;
             colosseum.send(`${winner.userObject} is now level ${results[0].Level + 1}!`);
@@ -135,11 +137,13 @@ class Arena {
           query = `
             UPDATE \`GladiatorBot\`.\`Levels\` 
             SET \`Experience\` = Experience + ${awardedXp},
-                \`Wins\` = Wins + 1
+                \`Wins\` = Wins + 1,
+                \`Streak\` = Streak + 1
             WHERE \`UserId\` = ${winner.id};
 
             UPDATE \`GladiatorBot\`.\`Levels\`
-            SET \`Losses\` = Losses + 1
+            SET \`Losses\` = Losses + 1,
+                \`Streak\` = Streak = 0
             WHERE \`UserId\` = ${loser.id};
               `;
           colosseum.send(`${winner.userObject} is only ${100 - (xp + 20)}xp from reaching level ${results[0].Level + 1}!`);
