@@ -11,7 +11,7 @@ class HelpCommand {
     *Taunt* = Taunt another user. What are they? Scared?!, 
     *Bow* = Prepare to fight your opponent in hand to hand combat!, 
     *Shoot* = Nock your bow and arrow and see if you can take that smile off their face!,
-    *Level* = Reports your current Level,
+    *Level* = Reports your current Level, Win Streak and Total Wins and Losses,
 
     Battle Commands,
     *Challenge* = Challenge another user to a duel of sorts!,

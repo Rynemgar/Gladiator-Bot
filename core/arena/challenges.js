@@ -11,7 +11,7 @@ class Challenges {
         if (this.challenges[i] && this.challenges[i].timestamp + this.challengeDuration > Date.now()) {
           const challenge = this.challenges.splice(i,1)[0];
           console.log('cancelling challenge', challenge);
-          colosseum.send(`${challenge.challenger}'s challenge falls on deaf ears. Challenge Expired!`);
+          colosseum.send(`${challenge.challenger}'s challenge of ${challenge.target} falls on deaf ears. Challenge Expired!`);
         }
       }
     }, 120000);

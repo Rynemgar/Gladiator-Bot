@@ -5,10 +5,10 @@ const querySql = require('../../../connection.js');
 
 class AcceptCommand {
   constructor() {
-    this.cooldown = 10000;
+    this.cooldown = 1000;
   }
   handler(message) {
-    message.delete(1000);
+    message.delete(10000);
     querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`).catch(console.error);
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
