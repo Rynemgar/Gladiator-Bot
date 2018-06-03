@@ -14,6 +14,7 @@ class ChallengeCommand {
     message.delete(1000);
     querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`).catch(console.error);
     const target = message.mentions.users.first();
+    if (this.lastUsed + this.cooldown > Date.now()) return;
     if (arena.inProgress === true) {
       message.channel.send(`${message.author} there is already a battle in progress.  Please wait for it to finish before issuing your challenge`);
       return;
@@ -22,9 +23,8 @@ class ChallengeCommand {
       message.channel.send(`${message.author} if you want to fall on your own sword, please do it elsewhere`);
     return;
     }
-    if (this.lastUsed + this.cooldown > Date.now()) return;
-
-    const mention = message.mentions.users.size > 0;
+    
+        const mention = message.mentions.users.size > 0;
     let response = randomElement(responses[mention ? 'mention' : 'noMention']);
     response = parseVariables(response, message);
     message.channel.send(response);
