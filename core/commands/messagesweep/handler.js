@@ -11,7 +11,7 @@ class MessageSweepCommand {
       message.channel.send("Only our Emperor can command this!");
       return; //stop other people commanding bot
     }
-    let messagecount = parseInt(message.content);
+    let messagecount = parseInt(5);
   message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
   }
 }
