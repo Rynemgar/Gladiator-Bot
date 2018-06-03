@@ -129,7 +129,8 @@ class Arena {
            SET \`Losses\` = Losses + 1
            WHERE \`UserId\` = ${loser.id};
             `;
-            colosseum.send(`${winner.userObject} is now level ${results[0].Level + 1}!`)
+            colosseum.send(`${winner.userObject} is now level ${results[0].Level + 1}!`);
+            colosseum.send(`.tip 250 ${winner.userObject} Congratulations champion!`)
         } else {
           query = `
             UPDATE \`GladiatorBot\`.\`Levels\` 
@@ -142,6 +143,7 @@ class Arena {
             WHERE \`UserId\` = ${loser.id};
               `;
           colosseum.send(`${winner.userObject} is only ${100 - (xp + 20)}xp from reaching level ${results[0].Level + 1}!`);
+          colosseum.send(`.tip 250 ${winner.userObject} Congratulations champion!`)
         }
         return querySql(query)
       })
