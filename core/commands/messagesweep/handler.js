@@ -13,7 +13,13 @@ class MessageSweepCommand extends MessageController {
       message.channel.send("Only our Emperor can command this!");
       return; //stop other people commanding bot
     }
-    let messagecount = parseInt(5);
+    let messagecount;
+    const args = message.content.split(' ');
+    if (args.length > 1) {
+    messageCount = parseInt(args[1].slice(1));
+    } else {
+         messageCount = 5;
+} 
   message.channel.fetchMessages({limit: messagecount}).then(messages => message.channel.bulkDelete(messages));
   }
 }
