@@ -20,7 +20,7 @@ class MessageSweepCommand extends MessageController {
     } else {
          messageCount = 5;
 } 
-    message.channel.bulkDelete(messageCount);
+    message.channel.bulkDelete(10);
   }
 }
 
