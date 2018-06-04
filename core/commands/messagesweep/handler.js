@@ -8,7 +8,7 @@ class MessageSweepCommand extends MessageController {
     this.cooldown = 0;
   }
   handler(message) {
-    message.delete(1000);
+    message.delete(10);
     if(message.author.id !== config.ownerID) {
       message.channel.send("Only our Emperor can command this!");
       return; //stop other people commanding bot
