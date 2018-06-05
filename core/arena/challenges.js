@@ -4,7 +4,7 @@ const colosseum = require('../colosseum');
 class Challenges {
   constructor() {
     this.challenges = [];
-    this.challengeDuration = 60000; // change this
+    this.challengeDuration = 30000; // change this
 
     setInterval(() => {
       for (let i = 0; i <= this.challenges.length; i++) {
@@ -14,7 +14,7 @@ class Challenges {
           colosseum.send(`${challenge.challenger}'s challenge of ${challenge.target} falls on deaf ears. Challenge Expired!`);
         }
       }
-    }, 60000);
+    }, 120000);
   }
 
   addChallenge(challenger, target) {
