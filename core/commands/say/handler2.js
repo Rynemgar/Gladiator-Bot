@@ -24,7 +24,7 @@ class SaygenCommand extends MessageController {
       return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
   }
     
-  message.guild.channels.find("name", "general").send(`${args.join(" ")}`);
+  message.guild.channels.find("name", "colosseum").send(`${args.join(" ")}`);
 
     this.lastUsed = Date.now();
   }

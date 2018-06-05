@@ -15,5 +15,6 @@ module.exports = {
   spectate: require('./spectate/handler'),
   leader: require('./leader/handler'),
   messageSweep: require('./messagesweep/handler'),
-  say: require('./say/handler')
+  saygen: require('./say/handler'),
+  saycol: require('./say/handler2')
 };
