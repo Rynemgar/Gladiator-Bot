@@ -7,11 +7,11 @@ class SayCommand extends MessageController {
   constructor() {
     super();
     this.global = true;
-    this.cooldown = 5000;
+    this.cooldown = 0;
   }
   handler(message) {
-    message.delete(1);
-    message.channel.send(`${message.content.replace}('!say ','')`)
+    message.delete(10);
+    message.channel.send(`${message.content.replace}('!say ','')`);
 
     this.lastUsed = Date.now();
   }
