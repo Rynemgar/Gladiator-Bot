@@ -14,6 +14,8 @@ class LevelCommand extends MessageController {
 
   handler(message) {
     message.delete(1000);
+    if (this.lastUsed + this.cooldown > Date.now()) return;
+    this.lastUsed = Date.now();
     querySql(`
       SELECT UserId, 
               Wins,
@@ -21,27 +23,36 @@ class LevelCommand extends MessageController {
       FROM Levels
       ORDER BY Wins DESC
       LIMIT 10
-`)
-.then((results) => {
-  const users = results.map((user) => Object.assign({}, {
-    userObject: colosseum.getMemberById(user.UserId)},
-    
-  ));
-  console.log(users)
-  colosseum.send(`Top 10 most fierce Gladiators!`);
-  for (const user of users) {
-     if (user.userObject) {
-       colosseum.send(`${user.userObject.nickname}. Wins: ${user.Wins}, Losses: ${user.Losses}`)
-     }
-  }
-})
-  
-    
-    .catch(console.error);
-    if (this.lastUsed + this.cooldown > Date.now()) return;
+      `)
+      .then((results) => {
+        const users = results.map((user) => {
+          return Object.assign({}, user, {
+              userObject: colosseum.getMemberById(user.UserId)
+            }
+          )
+        });
+        colosseum.send(`Top 10 most fierce Gladiators!`);
+        let i = 1;
+        // Prepend message with ``` to trigger code block
+        let message = '```';
 
+        for (const user of users) {
+          // Set username if they have a user object with discord, otherwise unknown (probably in dev server or left the server)
+          const username = user.userObject ? (user.userObject.nickname || user.userObject.user.username) : 'Unknown';
 
-    this.lastUsed = Date.now();
+          // prepend each users message with a new line. Have to remove all indentation for this message
+          message += `
+${i}. ${username}. Wins: ${user.Wins}, Losses: ${user.Losses}`;
+
+          // Increment the leader number
+          i++;
+        }
+
+        // Append message with ``` to end code block
+        message += '```';
+        colosseum.send(message);
+      })
+      .catch(console.error);
   }
 }
 
