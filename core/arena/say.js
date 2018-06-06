@@ -1,1 +1,0 @@
-message.channel.send(message.content.replace('!say ',''))

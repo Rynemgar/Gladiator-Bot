@@ -14,8 +14,11 @@ class Colosseum {
   }
 
   getColosseum() {
-    const server = client.guilds.first();
-    this.channel = server.channels.find('name', 'colosseum');
+    this.server = client.guilds.first();
+    this.channel = this.server.channels.find('name', 'colosseum');
+  }
+  getMemberById(id) {
+    return this.server.members.find('id', id);
   }
 
   send(message) {
