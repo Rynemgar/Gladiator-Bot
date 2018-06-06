@@ -8,6 +8,7 @@ class HelpCommand extends MessageController {
   handler(message) {
     message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
+    
     message.channel.send(`
 
     Commands,
@@ -15,6 +16,7 @@ class HelpCommand extends MessageController {
     *Bow = Prepare to fight your opponent in hand to hand combat!, 
     *Shoot = Nock your bow and arrow and see if you can take that smile off their face!,
     *Level = Reports your current Level, Win Streak and Total Wins and Losses,
+    *Leader = Returns a leaderboard of the top 10 Gladiators,
 
     Battle Commands,
     *Challenge = Challenge another user to a duel of sorts!,
@@ -27,7 +29,7 @@ class HelpCommand extends MessageController {
     *Legs = has a 80% chance of inflicting 10 damage to your opponent,
 
     And may the odds be *ever* in your favour!
-  `);
+ ` );
   this.lastUsed = Date.now();
 }
   
