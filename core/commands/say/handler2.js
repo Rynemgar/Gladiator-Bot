@@ -16,7 +16,7 @@ class SaygenCommand extends MessageController {
     const command = args.shift().toLowerCase();
     
     if(message.author.id !== config.ownerID) {
-      message.channel.send("Only our Emperor can change my prefix!");
+      message.channel.send("Only our Emperor can use my voice!");
 			return; //stop other people commanding bot
     }
     
