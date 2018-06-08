@@ -16,6 +16,7 @@ class legsCommand extends MessageController {
         case 'WIN':
           // handle win conditions
           message.channel.send(`${result.winner.userObject} was victorious. ${result.loser.userObject} remains lifeless on the ground.`);
+          message.channel.send(`To contribute to my prize fund, tip me directly!`);
           break;
         case 'HIT':
           //Handle hit
