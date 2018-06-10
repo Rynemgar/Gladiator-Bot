@@ -4,17 +4,17 @@ const colosseum = require('../colosseum');
 class Challenges {
   constructor() {
     this.challenges = [];
-    this.challengeDuration = 30000; // change this
+    this.challengeDuration = 60000; // change this
 
     setInterval(() => {
       for (let i = 0; i <= this.challenges.length; i++) {
-        if (this.challenges[i] && this.challenges[i].timestamp + this.challengeDuration > Date.now()) {
+        if (this.challenges[i] && this.challenges[i].timestamp + this.challengeDuration < Date.now()) {
           const challenge = this.challenges.splice(i,1)[0];
           console.log('cancelling challenge', challenge);
           colosseum.send(`${challenge.challenger}'s challenge of ${challenge.target} falls on deaf ears. Challenge Expired!`);
         }
       }
-    }, 120000);
+    }, 1000);
   }
 
   addChallenge(challenger, target) {
@@ -38,18 +38,18 @@ class Challenges {
         return {
           success: true,
           data: found
-        }
+        };
       } else {
         return {
           success: false,
           message: 'IN_PROGRESS'
-        }
+        };
       }
     } else {
       return {
         success: false,
         message: 'NO_CHALLENGE'
-      }
+      };
     }
   }
 }
