@@ -1,5 +1,4 @@
 const config = require('../../../config');
-const fs = require('fs');
 const MessageController = require('../message-controller');
 
 class MessageSweepCommand extends MessageController {
@@ -10,7 +9,6 @@ class MessageSweepCommand extends MessageController {
   }
   handler(message) {
     const args = message.content.slice().split(/ +/);
-	  const command = args.shift().toLowerCase();
 		const amount = parseInt(args[0]) + 1;
 		
 		if(message.author.id !== config.ownerID) {
