@@ -9,6 +9,7 @@ class MessageSweepCommand extends MessageController {
     this.cooldown = 0;
   }
   handler(message) {
+		
     const args = message.content.slice().split(/ +/);
 	  const command = args.shift().toLowerCase();
 		const amount = parseInt(args[0]) + 1;
@@ -31,4 +32,5 @@ class MessageSweepCommand extends MessageController {
 		});
   }
 }
+
 module.exports = new MessageSweepCommand();

@@ -30,10 +30,10 @@ class HelpCommand extends MessageController {
 
     And may the odds be *ever* in your favour!
  ` );
- message.channel.send(`To contribute to my prize fund, tip me directly!`);
+
+  message.channel.send(`To contribute to my prize fund, tip me directly!`);
   this.lastUsed = Date.now();
-}
-  
+  }
 }
 
 module.exports = new HelpCommand();

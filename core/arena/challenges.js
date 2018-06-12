@@ -31,8 +31,10 @@ class Challenges {
         break;
       }
     }
+
     if (found) {
       const fightStarted = arena.startFight(found.challenger, found.target);
+      
       if (fightStarted) {
         this.challenges.splice(idx, 1);
         return {
@@ -50,6 +52,7 @@ class Challenges {
         success: false,
         message: 'NO_CHALLENGE'
       };
+
     }
   }
 }

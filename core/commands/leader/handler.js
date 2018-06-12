@@ -2,7 +2,7 @@ const randomElement = require('../../../utils/get-random-element');
 const parseVariables = require('../../response-variables');
 const challenges = require('../../arena/challenges');
 const arena = require('../../arena/arena');
-const querySql = require('../../../connection.js');
+const knex = require('../../../utils/knex');
 const MessageController = require('../message-controller');
 const colosseum = require('../../colosseum');
 
@@ -15,15 +15,13 @@ class LevelCommand extends MessageController {
   handler(message) {
     message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
+
     this.lastUsed = Date.now();
-    querySql(`
-      SELECT UserId, 
-              Wins,
-              Losses 
-      FROM Levels
-      ORDER BY Wins DESC
-      LIMIT 10
-      `)
+    
+    knex('levels')
+    .select('UserId', 'Wins', 'Losses')
+    .orderBy('Wins', 'desc')
+    .limit(10)
       .then((results) => {
         const users = results.map((user) => {
           return Object.assign({}, user, {
@@ -41,8 +39,7 @@ class LevelCommand extends MessageController {
           const username = user.userObject ? (user.userObject.nickname || user.userObject.user.username) : 'Unknown';
 
           // prepend each users message with a new line. Have to remove all indentation for this message
-          message += `
-${i}. ${username}. Wins: ${user.Wins}, Losses: ${user.Losses}`;
+          message += `${i}. ${username}. Wins: ${user.Wins}, Losses: ${user.Losses}`;
 
           // Increment the leader number
           i++;

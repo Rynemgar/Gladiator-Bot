@@ -1,5 +1,5 @@
 const Gladiator = require('./gladiator');
-const querySql = require('../../connection');
+const knex = require('../../utils/knex');
 const colosseum = require('../colosseum');
 
 class Arena {
@@ -104,65 +104,69 @@ class Arena {
   }
 
   endArena(winner, loser) {
-    querySql(`
-      SELECT 
-        Experience,
-        Level,
-        Wins,
-        Losses 
-      FROM Levels 
-      WHERE UserID = ${winner.id}
-    `)
-      .then((results) => {
-        const xp = results[ 0 ].Experience;
-        const awardedXp = 20;
-        let query;
-        if (xp + awardedXp > 99) {
-          query = `
-           UPDATE \`GladiatorBot\`.\`Levels\` 
-           SET \`Experience\` = 0,
-               \`Level\` = Level + 1,
-               \`Wins\` = Wins + 1,
-               \`Streak\` = Streak + 1
-           WHERE \`UserId\` = ${winner.id};
+    knex('levels')
+    .select('Experience', 'Level', 'Wins', 'Losses')
+    .where('UserID', winner.id)
+    .then((results) => {
 
-           UPDATE \`GladiatorBot\`.\`Levels\`
-           SET \`Losses\` = Losses + 1,
-               \`Streak\` = Streak = 0
-           WHERE \`UserId\` = ${loser.id};
-            `;
-            colosseum.send(`${winner.userObject} is now level ${results[0].Level + 1}!`);
-            colosseum.send(`.tip 250 ${winner.userObject} Congratulations champion!`)
-        } else {
-          query = `
-            UPDATE \`GladiatorBot\`.\`Levels\` 
-            SET \`Experience\` = Experience + ${awardedXp},
-                \`Wins\` = Wins + 1,
-                \`Streak\` = Streak + 1
-            WHERE \`UserId\` = ${winner.id};
+      const xp = results[0].Experience;
+      const awardedXp = 20;
 
-            UPDATE \`GladiatorBot\`.\`Levels\`
-            SET \`Losses\` = Losses + 1,
-                \`Streak\` = Streak = 0
-            WHERE \`UserId\` = ${loser.id};
-              `;
-          colosseum.send(`${winner.userObject} is only ${100 - (xp + 20)}xp from reaching level ${results[0].Level + 1}!`);
-          colosseum.send(`.tip 250 ${winner.userObject} Congratulations champion!`)
-        }
-        return querySql(query)
+      const loser = knex('Levels')
+      .update({
+        Losses: knex.raw('Losses + 1'),
+        Streak: 0
+      })
+      ('UserID', loser.id)
+
+      let levelMessage
+
+      if (xp + awardedXp > 99) {
+
+        const winner = knex('Levels')
+        .update({
+          Experience: 0,
+          Level: knex.raw('Level + 1'),
+          Wins: knex.raw('Wins + 1'),
+          Streak = knex.raw('Streak + 1')
+        })
+        .where('UserID', winner.id)
+
+        levelMessage = `${winner.userObject} is now level ${results[0].Level + 1}!`;
+
+      } else {
+
+        const winner = knex('Levels')
+        .update({
+          Experience: awardedXp,
+          Wins: knex.raw('Wins + 1'),
+          Streak = knex.raw('Streak + 1')
+        })
+        .where('UserID', winner.id)
+
+        levelMessage = `${winner.userObject} is only ${100 - (xp + 20)}xp from reaching level ${results[0].Level + 1}!`;
+      }
+
+
+      Promise.all([winner, loser])
+      .then(result => {
+
+        colosseum.send(levelMessage);
+        colosseum.send(`.tip 250 ${winner.userObject} Congratulations champion!`)
+
       })
       .then(() => {
         console.log(`Updated ${winner.id}`);
       })
       .catch(console.error);
+    })
 
-
-    return {
-      message: 'WIN',
-      winner,
-      loser
-    }
+  return {
+    message: 'WIN',
+    winner,
+    loser
   }
+}
 
   attackHead(attackingUser) {
     return this._attackGladiator(attackingUser, this.attacks.head);
