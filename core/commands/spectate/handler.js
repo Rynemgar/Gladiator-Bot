@@ -15,10 +15,10 @@ class SpectateCommand extends MessageController {
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
     if (arena.inProgress) {
-      message.channel.send(`${message.author} sits down to enjoy the show. 
+      message.channel.send(`${message.author} sits down to enjoy the fight in the #colosseum. 
       Currently ${arena.gladiator1.userObject} (${arena.gladiator1.health}hp) is fighting ${arena.gladiator2.userObject} (${arena.gladiator2.health}hp)`);
     } else {
-      message.channel.send(`${message.author} sits down to watch an empty arena...`);
+      message.channel.send(`${message.author} sits down to watch an empty #colosseum...`);
     }
 
     this.lastUsed = Date.now();
