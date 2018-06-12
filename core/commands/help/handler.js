@@ -17,6 +17,7 @@ class HelpCommand extends MessageController {
     *Shoot = Nock your bow and arrow and see if you can take that smile off their face!,
     *Level = Reports your current Level, Win Streak and Total Wins and Losses,
     *Leader = Returns a leaderboard of the top 10 Gladiators,
+    *Balance = Return my current prize fund balance,
 
     Battle Commands,
     *Challenge = Challenge another user to a duel of sorts!,
