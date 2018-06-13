@@ -10,7 +10,7 @@ class Arena {
     this.baseGladiatorStats = {
       health: 100
     };
-
+    
     this.attacks = {
       head: {
         chance: 0.1,
@@ -24,9 +24,9 @@ class Arena {
         chance: 0.80,
         damage: 10
       },
-      lions: {
+      potion: {
         chance: 1,
-        damage: 1000
+        damage: -20
       }
     };
 
@@ -176,8 +176,8 @@ class Arena {
     return this._attackGladiator(attackingUser, this.attacks.legs);
   }
 
-  attackLions(attackingUser) {
-    return this._attackGladiator(attackingUser, this.attacks.lions);
+  attackPotion(attackingUser) {
+    return this._attackGladiator(attackingUser, this.attacks.potion);
   }
 }
 
