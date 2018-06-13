@@ -18,14 +18,14 @@ class PotionCommand extends MessageController {
       WHERE UserID = ${message.author.id}
       `)
       .then((results) => {
-        const potionAmt = results[ 0 ].Potions;
+        const potionAmt = results[0] && results[ 0 ].Potions;
         console.log(results);
       
     
     
     if (arena.inProgress) {
-      if (potionAmt === 0) {
-        message.channgel.send(`You don't have any potions at hand Gladiator ${message.author}`)
+      if (!potionAmt) {
+        message.channel.send(`You don't have any potions at hand Gladiator ${message.author}`)
       return;
       }
 

@@ -14,7 +14,7 @@ module.exports = {
   level: require('./level/handler'),
   spectate: require('./spectate/handler'),
   leader: require('./leader/handler'),
-  messageSweep: require('./messagesweep/handler'),
+  messagesweep: require('./messagesweep/handler'),
   saygen: require('./say/handler'),
   saycol: require('./say/handler2'),
   balance: require('./balance/handler')

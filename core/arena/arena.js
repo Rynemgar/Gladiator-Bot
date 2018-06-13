@@ -1,6 +1,6 @@
-const Gladiator = require('./gladiator');
-const querySql = require('../../connection');
-const colosseum = require('../colosseum');
+const Gladiator = require("./gladiator");
+const querySql = require("../../connection");
+const colosseum = require("../colosseum");
 
 class Arena {
   constructor() {
@@ -10,7 +10,7 @@ class Arena {
     this.baseGladiatorStats = {
       health: 100
     };
-    
+
     this.attacks = {
       head: {
         chance: 0.1,
@@ -21,18 +21,22 @@ class Arena {
         damage: 30
       },
       legs: {
-        chance: 0.80,
+        chance: 0.8,
         damage: 10
       },
       potion: {
         chance: 1,
-        damage: -20
+        damage: -20,
+        targetSelf: true
       }
     };
 
     this.arenaExpirationTime = 60000;
     setInterval(() => {
-      if (this.lastAttacker && this.lastAttacker.timestamp + this.arenaExpirationTime < Date.now()) {
+      if (
+        this.lastAttacker &&
+        this.lastAttacker.timestamp + this.arenaExpirationTime < Date.now()
+      ) {
         this.expireArena();
       }
     }, 1000);
@@ -47,12 +51,17 @@ class Arena {
   }
 
   _getGladiator(user) {
-    return user.id === this.gladiator1.id ? this.gladiator1 : user.id === this.gladiator2.id ? this.gladiator2 : null;
+    return user.id === this.gladiator1.id
+      ? this.gladiator1
+      : user.id === this.gladiator2.id
+        ? this.gladiator2
+        : null;
   }
 
   _attackGladiator(attackingUser, attack) {
     const attacker = this._getGladiator(attackingUser);
-    const target = attacker === this.gladiator1 ? this.gladiator2 : this.gladiator1;
+    const target =
+      attacker === this.gladiator1 ? this.gladiator2 : this.gladiator1;
     if (attacker && target) {
       if (!this.lastAttacker || this.lastAttacker.user.id !== attacker.id) {
         this.lastAttacker = {
@@ -61,7 +70,11 @@ class Arena {
         };
         const roll = Math.random();
         if (roll < attack.chance) {
-          target.damage(attack.damage);
+          if (attack.targetSelf) {
+            attacker.damage(attack.damage);
+          } else {
+            target.damage(attack.damage);
+          }
 
           if (target.health <= 0) {
             this.inProgress = false;
@@ -71,32 +84,36 @@ class Arena {
             return this.endArena(attacker, target);
           }
           return {
-            message: 'HIT',
+            message: "HIT",
             gladiator: attacker,
             target
-          }
+          };
         } else {
           return {
-            message: 'MISS',
+            message: "MISS",
             gladiator: attacker,
             target
-          }
+          };
         }
       } else {
         return {
-          message: 'TURN'
-        }
+          message: "TURN"
+        };
       }
     } else {
       return {
-        message: 'NOT_GLADIATOR'
-      }
+        message: "NOT_GLADIATOR"
+      };
     }
   }
 
   expireArena() {
-    console.log('Arena Expire');
-    colosseum.send(`I guess ${this.gladiator1.userObject} and ${this.gladiator2.userObject} fell asleep?... Arena expired`);
+    console.log("Arena Expire");
+    colosseum.send(
+      `I guess ${this.gladiator1.userObject} and ${
+        this.gladiator2.userObject
+      } fell asleep?... Arena expired`
+    );
     this.inProgress = false;
     this.lastAttacker = null;
     this.gladiator1 = null;
@@ -113,8 +130,8 @@ class Arena {
       FROM Levels 
       WHERE UserID = ${winner.id}
     `)
-      .then((results) => {
-        const xp = results[ 0 ].Experience;
+      .then(results => {
+        const xp = results[0].Experience;
         const awardedXp = 20;
         let query;
         if (xp + awardedXp > 99) {
@@ -131,8 +148,12 @@ class Arena {
                \`Streak\` = Streak = 0
            WHERE \`UserId\` = ${loser.id};
             `;
-            colosseum.send(`${winner.userObject} is now level ${results[0].Level + 1}!`);
-            colosseum.send(`.tip 250 ${winner.userObject} Congratulations champion!`)
+          colosseum.send(
+            `${winner.userObject} is now level ${results[0].Level + 1}!`
+          );
+          colosseum.send(
+            `.tip 250 ${winner.userObject} Congratulations champion!`
+          );
         } else {
           query = `
             UPDATE \`GladiatorBot\`.\`Levels\` 
@@ -146,22 +167,26 @@ class Arena {
                 \`Streak\` = Streak = 0
             WHERE \`UserId\` = ${loser.id};
               `;
-          colosseum.send(`${winner.userObject} is only ${100 - (xp + 20)}xp from reaching level ${results[0].Level + 1}!`);
-          colosseum.send(`.tip 250 ${winner.userObject} Congratulations champion!`)
+          colosseum.send(
+            `${winner.userObject} is only ${100 -
+              (xp + 20)}xp from reaching level ${results[0].Level + 1}!`
+          );
+          colosseum.send(
+            `.tip 250 ${winner.userObject} Congratulations champion!`
+          );
         }
-        return querySql(query)
+        return querySql(query);
       })
       .then(() => {
         console.log(`Updated ${winner.id}`);
       })
       .catch(console.error);
 
-
     return {
-      message: 'WIN',
+      message: "WIN",
       winner,
       loser
-    }
+    };
   }
 
   attackHead(attackingUser) {
