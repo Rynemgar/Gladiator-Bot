@@ -104,7 +104,7 @@ class Arena {
   }
 
   endArena(winner, loser) {
-    knex('levels')
+    knex('Levels')
     .select('Experience', 'Level', 'Wins', 'Losses')
     .where('UserID', winner.id)
     .then((results) => {
@@ -112,7 +112,7 @@ class Arena {
       const xp = results[0].Experience;
       const awardedXp = 20;
 
-      const loser = knex('Levels')
+      const loserInsert = knex('Levels')
       .update({
         Losses: knex.raw('Losses + 1'),
         Streak: 0
@@ -123,12 +123,12 @@ class Arena {
 
       if (xp + awardedXp > 99) {
 
-        const winner = knex('Levels')
+        const winnerInsert = knex('Levels')
         .update({
           Experience: 0,
           Level: knex.raw('Level + 1'),
           Wins: knex.raw('Wins + 1'),
-          Streak = knex.raw('Streak + 1')
+          Streak: knex.raw('Streak + 1')
         })
         .where('UserID', winner.id)
 
@@ -136,11 +136,11 @@ class Arena {
 
       } else {
 
-        const winner = knex('Levels')
+        const winnerInsert = knex('Levels')
         .update({
           Experience: awardedXp,
           Wins: knex.raw('Wins + 1'),
-          Streak = knex.raw('Streak + 1')
+          Streak: knex.raw('Streak + 1')
         })
         .where('UserID', winner.id)
 
@@ -148,7 +148,7 @@ class Arena {
       }
 
 
-      Promise.all([winner, loser])
+      Promise.all([winnerInsert, loserInsert])
       .then(result => {
 
         colosseum.send(levelMessage);

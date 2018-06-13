@@ -20,7 +20,7 @@ class ChallengeCommand extends MessageController {
     if (this.lastUsed + this.cooldown > Date.now()) return;
     this.lastUsed = Date.now();
 
-    knew.raw(knex('levels').insert({ userId: message.author.id }).toString().replace('insert', 'INSERT IGNORE'))
+    knex.raw(knex('Levels').insert({ userId: message.author.id }).toString().replace('insert', 'INSERT IGNORE'))
     .then(result => {
       const target = message.mentions.users.first();
       if (arena.inProgress === true) {

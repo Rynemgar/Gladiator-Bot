@@ -18,7 +18,7 @@ class LevelCommand extends MessageController {
 
     this.lastUsed = Date.now();
     
-    knex('levels')
+    knex('Levels')
     .select('UserId', 'Wins', 'Losses')
     .orderBy('Wins', 'desc')
     .limit(10)

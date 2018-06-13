@@ -14,16 +14,18 @@ class LevelCommand extends MessageController {
   handler(message) {
     message.delete(1000);
 
-    const insertLevel = knew.raw(knex('levels').insert({ userId: message.author.id }).toString().replace('insert', 'INSERT IGNORE'))
-    const selectLevel = knex('levels').select('Level', 'Wins', 'Losses', 'Streak').where('UserID', message.author.id)
+    const insertLevel = knex.raw(knex('Levels').insert({ userId: message.author.id }).toString().replace('insert', 'INSERT IGNORE'))
+    const selectLevel = knex('Levels').select('UserId', 'Level', 'Wins', 'Losses', 'Streak').where('UserID', message.author.id)
 
     Promise.all([insertLevel, selectLevel])
-    .then(function(insertResult, selectResult) {
+    .then(result => {
       
-      const level = selectResult[0] ? selectResult[0].Level : 0;
-      const wins = selectResult[0] ? selectResult[0].Wins : 0;
-      const losses = selectResult[0] ? selectResult[0].Losses : 0;
-      const streak = selectResult[0] ? selectResult[0].Streak : 0;
+      console.log(result[1])
+      
+      const level = result[1][0] ? result[1][0].Level : 0;
+      const wins = result[1][0] ? result[1][0].Wins : 0;
+      const losses = result[1][0] ? result[1][0].Losses : 0;
+      const streak = result[1][0] ? result[1][0].Streak : 0;
 
       message.reply(`You are currently Level ${level} with a winning streak of ${streak} and a total of ${wins} wins and ${losses} losses!`);
     })

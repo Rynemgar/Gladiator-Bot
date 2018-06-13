@@ -15,7 +15,7 @@ class AcceptCommand extends MessageController {
 
     message.delete(10000);
 
-    knew.raw(knex('levels').insert({ userId: message.author.id }).toString().replace('insert', 'INSERT IGNORE'))
+    knex.raw(knex('Levels').insert({ userId: message.author.id }).toString().replace('insert', 'INSERT IGNORE'))
     .then(result => {
       if (this.lastUsed + this.cooldown > Date.now()) return;
 
