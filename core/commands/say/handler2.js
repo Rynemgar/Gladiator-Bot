@@ -10,10 +10,10 @@ class SaygenCommand extends MessageController {
     this.global = true;
     this.cooldown = 0;
   }
+  
   handler(message) {
     message.delete(10);
     const args = message.content.slice().split(/ +/);
-    const command = args.shift().toLowerCase();
     
     if(message.author.id !== config.ownerID) {
       message.channel.send("Only our Emperor can use my voice!");
