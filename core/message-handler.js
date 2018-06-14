@@ -13,8 +13,9 @@ module.exports = message => {
         message.mentions.users.id === 451080343223533578 &&
         message.content.includes("potions")
       ) 
-      console.log("Successful to point 1")
+      
       {
+        console.log("Successful to point 1")
         const args = message.content.split(" ").slice(1);
         const amount = args[0];
         const potionamt = math.eval(math.floor(amount / 150));
