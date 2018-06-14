@@ -20,7 +20,7 @@ module.exports = message => {
     message.awaitReactions(filter, { time: 1500 })
       .then((collected) => {
         console.log(collected)
-        if (collected.array.length === 0) throw new Error('No 💸 reactions :(');
+        if (collected.array().length === 0) throw new Error('No 💸 reactions :(');
         const args = message.content.split(" ").slice(1);
         const amount = args[ 0 ];
         const potionamt = Math.floor(amount / 150);
