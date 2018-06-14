@@ -8,11 +8,12 @@ module.exports = message => {
   if (commands[ trigger ]) {
     return commands[ trigger ].handleMessage(message);
   }
-
+const filter = (reaction, user) => reaction.emoji.name === ':money_with_wings:' && user.id === '413887034864697364'
   if (
     message.content.startsWith(".tip") &&
     message.mentions.users.get('451080343223533578') &&
-    message.content.includes("potions")
+    message.content.includes("potions") &&
+    message.awaitReactions(filter, { time: 1500 })
   ) {
     const args = message.content.split(" ").slice(1);
     const amount = args[ 0 ];
@@ -23,6 +24,7 @@ module.exports = message => {
          SET \`Potions\` = Potions + ${potionamt}
          WHERE UserID = ${message.author.id}`)
       .then(results => {
+        message.channel.send(`${message.author} purchased ${potionamt} potions for ${amount}TRTL`);
         console.log(`${message.author} purchased ${potionamt} potions for ${amount}TRTL`);
       })
       .catch(e => {
