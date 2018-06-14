@@ -14,8 +14,9 @@ const filter = (reaction, user) => reaction.emoji.name === '💸' && user.id ===
     message.mentions.users.get('447326000758652929') &&
     message.content.includes("potions")
   ) {
-    message.awaitReactions(filter, { time: 1500 })
-      .then(() => {
+    message.awaitReactions(filter, { max: 1, time: 1500 })
+      .then((collected) => {
+        if (collected === 0) throw new Error('No 💸 reactions :(');
         const args = message.content.split(" ").slice(1);
         const amount = args[ 0 ];
         const potionamt = Math.floor(amount / 150);
