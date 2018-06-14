@@ -8,7 +8,7 @@ module.exports = message => {
   if (commands[ trigger ]) {
     return commands[ trigger ].handleMessage(message);
   }
-const filter = (reaction, user) => reaction.emoji.name === '💸' && user.id === '413887034864697364';
+const filter = (reaction, user) => reaction.emoji.name === ':money_with_wings:' && user.id === '413887034864697364';
   if (
     message.content.startsWith(".tip") &&
     message.mentions.users.get('447326000758652929') &&
