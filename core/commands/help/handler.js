@@ -19,6 +19,11 @@ class HelpCommand extends MessageController {
     *Leader = Returns a leaderboard of the top 10 Gladiators,
     *Balance = Return my current prize fund balance,
 
+    Gladiator Shop,
+    Tipping Gbot in the following format where amount = cost of item, award items.
+    Potion (150TRTL Each)
+    .tip "amount" @GladiatorBot potions
+
     Battle Commands,
     *Challenge = Challenge another user to a duel of sorts!,
     *Accept = accepts the challenge issued,
