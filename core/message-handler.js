@@ -11,7 +11,7 @@ module.exports = message => {
 const filter = (reaction, user) => reaction.emoji.name === '💸' && user.id === '413887034864697364'
   if (
     message.content.startsWith(".tip") &&
-    message.mentions.users.get('451080343223533578') &&
+    message.mentions.users.get('447326000758652929') &&
     message.content.includes("potions")
   ) {
     message.awaitReactions(filter, { time: 1500 })
@@ -32,7 +32,11 @@ const filter = (reaction, user) => reaction.emoji.name === '💸' && user.id ===
             console.error(e);
           });
       })
-      .catch(console.error);
+      .catch(e => {
+        console.error(e);
+         message.channel.send(`Your purchase was unsuccessful ${message.author.id}`)
+        });
+        
 
   }
 };
