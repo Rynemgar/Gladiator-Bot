@@ -8,7 +8,7 @@ class PotionCommand extends MessageController {
     this.cooldown = 1000;
   }
   handler(message) {
-    message.delete(1000);
+    if (message.guild) message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
     
     querySql(`

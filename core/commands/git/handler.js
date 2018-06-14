@@ -6,7 +6,7 @@ class GitCommand extends MessageController {
     this.cooldown = 0;
   }
   handler(message) {
-    message.delete(1000);
+    if (message.guild) message.delete(1000);
     message.channel.send(`You can find the most recently updated code at https://github.com/Rynemgar/Gladiator-Bot`)
   }
 }

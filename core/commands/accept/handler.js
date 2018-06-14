@@ -10,7 +10,7 @@ class AcceptCommand extends MessageController {
     this.cooldown = 1000;
   }
   handler(message) {
-    message.delete(10000);
+    if (message.guild) message.delete(10000);
     querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`).catch(console.error);
     if (this.lastUsed + this.cooldown > Date.now()) return;
 

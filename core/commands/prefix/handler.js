@@ -8,7 +8,7 @@ class PrefixCommand extends MessageController {
     this.cooldown = 0;
   }
   handler(message) {
-    message.delete(1000);
+    if (message.guild) message.delete(1000);
     if(message.author.id !== config.ownerID) {
       message.channel.send("Only our Emperor can change my prefix!");
       return; //stop other people commanding bot

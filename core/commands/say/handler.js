@@ -1,6 +1,4 @@
-const randomElement = require('../../../utils/get-random-element');
-const parseVariables = require('../../response-variables');
-const arena = require('../../arena/arena');
+const colosseum = require('../../colosseum');
 const MessageController = require('../message-controller');
 const config = require('../../../config');
 
@@ -11,7 +9,7 @@ class SaygenCommand extends MessageController {
     this.cooldown = 0;
   }
   handler(message) {
-    message.delete(10);
+    if (message.guild) message.delete(10);
     const args = message.content.split(' ').slice(1);
 
     if(message.author.id !== config.ownerID) {
@@ -23,7 +21,7 @@ class SaygenCommand extends MessageController {
       return message.channel.send(`You didn't provide any arguments, ${message.author}!`);
   }
     
-  message.guild.channels.find("name", "general").send(`${args.join(" ")}`);
+    colosseum.server.channels.find("name", "general").send(`${args.join(" ")}`);
 
     this.lastUsed = Date.now();
   }

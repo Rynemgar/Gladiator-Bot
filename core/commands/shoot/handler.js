@@ -9,7 +9,7 @@ class ShootCommand extends MessageController {
     this.cooldown = 5000;
   }
   handler(message) {
-    message.delete(1000);
+    if (message.guild) message.delete(1000);
     const target = message.mentions.users.first();
     if (this.lastUsed + this.cooldown > Date.now()) return;
 

@@ -12,7 +12,7 @@ class LevelCommand extends MessageController {
   }
 
   handler(message) {
-    message.delete(1000);
+    if (message.guild) message.delete(1000);
     querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`)
       .then(() => querySql(`
         SELECT Level,

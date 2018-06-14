@@ -6,7 +6,7 @@ class HelpCommand extends MessageController {
     this.cooldown = 20000;
   }
   handler(message) {
-    message.delete(1000);
+    if (message.guild) message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
     
     message.channel.send(`

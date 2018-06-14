@@ -13,7 +13,7 @@ class LevelCommand extends MessageController {
   }
 
   handler(message) {
-    message.delete(1000);
+    if (message.guild) message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
     this.lastUsed = Date.now();
     querySql(`
