@@ -12,7 +12,7 @@ class SaygenCommand extends MessageController {
   }
   handler(message) {
     message.delete(10);
-    const args = message.content.split(' ').shift();
+    const args = message.content.split(' ').slice(1);
 
     if(message.author.id !== config.ownerID) {
       message.channel.send("Only our Emperor can use my voice!");
