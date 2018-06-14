@@ -35,7 +35,7 @@ const filter = (reaction, user) => reaction.emoji.name === '💸' && user.id ===
       })
       .catch(e => {
         console.error(e);
-         message.channel.send(`Your purchase was unsuccessful ${message.author.id}`)
+         message.channel.send(`Your purchase was unsuccessful ${message.author}`)
         });
         
 
