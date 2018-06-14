@@ -11,6 +11,7 @@
     "discord.io": "^2.5.3",
     "discord.js": "^11.3.2",
     "dotenv": "^5.0.1",
+    "logdna": "^2.0.2",
     "mysql": "^2.15.0",
     "request": "^2.87.0",
     "request-promise-native": "^1.0.5",

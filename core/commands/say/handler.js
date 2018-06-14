@@ -12,9 +12,8 @@ class SaygenCommand extends MessageController {
   }
   handler(message) {
     message.delete(10);
-    const args = message.content.slice().split(/ +/);
-    const command = args.shift().toLowerCase();
-    
+    const args = message.content.split(' ').shift();
+
     if(message.author.id !== config.ownerID) {
       message.channel.send("Only our Emperor can use my voice!");
 			return; //stop other people commanding bot
