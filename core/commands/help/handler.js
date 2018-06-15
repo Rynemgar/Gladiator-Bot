@@ -33,6 +33,7 @@ class HelpCommand extends MessageController {
     *Head = Has a 10% chance of inflicting 50 damage to your opponent,
     *Body = Has a 33% chance of inflicting 30 damage to your opponent,
     *Legs = has a 80% chance of inflicting 10 damage to your opponent,
+    *Potion = Recover 20hp if you have a potion - Otherwise you miss your turn!
 
     And may the odds be *ever* in your favour!
  ` );
