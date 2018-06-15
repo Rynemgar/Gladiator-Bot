@@ -3,16 +3,12 @@ const commands = require('./commands');
 const querySql = require('../connection');
 
 module.exports = message => {
-  if (message.content[ 0 ] !== config.prefix) return;
   //if (message.author.bot) return;
   const trigger = message.content.split(' ')[ 0 ].slice(1).toLowerCase();
   if (commands[ trigger ]) {
     return commands[ trigger ].handleMessage(message);
   }
-  const filter = (reaction, user) => {
-    console.log(reaction.emoji);
-    return reaction.emoji.name === '💸' && user.id === '413887034864697364';
-};
+  const filter = (reaction, user) => reaction.emoji.name === '💸' && user.id === '413887034864697364';
   if (
     message.content.startsWith(".tip") &&
     message.mentions.users.get('447326000758652929') &&
