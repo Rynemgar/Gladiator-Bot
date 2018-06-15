@@ -3,6 +3,7 @@ const commands = require('./commands');
 const querySql = require('../connection');
 
 module.exports = message => {
+  if (message.content[ 0 ] !== config.prefix) return;
   //if (message.author.bot) return;
   const trigger = message.content.split(' ')[ 0 ].slice(1).toLowerCase();
   if (commands[ trigger ]) {
