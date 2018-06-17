@@ -16,8 +16,8 @@ class LevelCommand extends MessageController {
     querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`)
       .then(() => querySql(`
         SELECT Level,
-              Wins,
-              Losses,
+              OverallWins,
+              OverallLosses,
               Streak 
         FROM Levels 
         WHERE UserID = ${message.author.id}
@@ -25,10 +25,10 @@ class LevelCommand extends MessageController {
 
       .then((results) => {
         const level = results[0] ? results[ 0 ].Level : 0;
-        const wins = results[0] ? results[ 0 ].Wins : 0;
-        const losses = results[0] ? results[ 0 ].Losses : 0;
+        const wins = results[0] ? results[ 0 ].OverallWins : 0;
+        const losses = results[0] ? results[ 0 ].OverallLosses : 0;
         const streak = results[0] ? results[ 0 ].Streak : 0;
-        message.reply(`You are currently Level ${level} with a winning streak of ${streak} and a total of ${wins} wins and ${losses} losses!`);
+        message.reply(`You are currently Level ${level} with a current winning streak of ${streak} and an overall total of ${wins} wins and ${losses} losses!`);
       })
       .catch(console.error);
 
