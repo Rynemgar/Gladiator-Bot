@@ -17,5 +17,6 @@ module.exports = {
   messagesweep: require('./messagesweep/handler'),
   saygen: require('./say/handler'),
   saycol: require('./say/handler2'),
-  balance: require('./balance/handler')
+  balance: require('./balance/handler'),
+  stock: require('./stock/handler')
 };
