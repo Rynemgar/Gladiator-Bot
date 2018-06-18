@@ -18,6 +18,7 @@ class HelpCommand extends MessageController {
     *Level = Reports your current Level, Win Streak and Total Wins and Losses,
     *Leader = Returns a leaderboard of the top 10 Gladiators,
     *Balance = Return my current prize fund balance,
+    *Stock = Display how many potions you currently hold,
 
     Gladiator Shop,
     Tipping Gbot in the following format where amount = cost of item, award items.
