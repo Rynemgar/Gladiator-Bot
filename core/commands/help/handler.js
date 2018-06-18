@@ -8,8 +8,8 @@ class HelpCommand extends MessageController {
   handler(message) {
     if (message.guild) message.delete(1000);
     if (this.lastUsed + this.cooldown > Date.now()) return;
-    
-    message.channel.send(`
+    const code = "```"
+    message.channel.send(`${code}
 
     Commands,
     *Taunt = Taunt another user. What are they? Scared?!, 
@@ -36,7 +36,7 @@ class HelpCommand extends MessageController {
     *Legs = has a 80% chance of inflicting 10 damage to your opponent,
     *Potion = Recover 20hp if you have a potion - Otherwise you miss your turn!
 
-    And may the odds be *ever* in your favour!
+    And may the odds be *ever* in your favour!${code}
  ` );
  message.channel.send(`To contribute to my prize fund, tip me directly!`);
   this.lastUsed = Date.now();
