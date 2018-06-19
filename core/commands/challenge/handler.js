@@ -17,7 +17,7 @@ class ChallengeCommand extends MessageController {
     if (this.lastUsed + this.cooldown > Date.now()) return;
     this.lastUsed = Date.now();
 
-    querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`).catch(console.error);
+    querySql(`INSERT IGNORE INTO Levels (userId, username) VALUES (${message.author.id}, ${message.author.username})`).catch(console.error);
     const target = message.mentions.users.first();
     if (arena.inProgress === true) {
       message.channel.send(`${message.author} there is already a battle in progress.  Please wait for it to finish before issuing your challenge`);
