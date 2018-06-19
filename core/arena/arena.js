@@ -26,7 +26,7 @@ class Arena {
       },
       potion: {
         chance: 1,
-        damage: -20,
+        damage: -30,
         targetSelf: true
       }
     };
