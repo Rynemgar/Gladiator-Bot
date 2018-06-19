@@ -3,6 +3,7 @@ const parseVariables = require('../../response-variables');
 const challenges = require('../../arena/challenges');
 const querySql = require('../../../connection.js');
 const MessageController = require('../message-controller');
+const escape = require('mysql').escape;
 
 class AcceptCommand extends MessageController {
   constructor() {
@@ -12,6 +13,10 @@ class AcceptCommand extends MessageController {
   handler(message) {
     if (message.guild) message.delete(10000);
     querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`).catch(console.error);
+    querySql(`UPDATE \`GladiatorBot\`.\`Levels\` 
+    SET \`username\` = ${escape(message.author.username)}
+    WHERE \`UserId\` = ${message.author.id};`)
+    .catch(console.error);
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
     const challenge = challenges.acceptChallenge(message.author);
