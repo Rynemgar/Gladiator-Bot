@@ -5,6 +5,7 @@ const challenges = require('../../arena/challenges');
 const arena = require('../../arena/arena');
 const querySql = require('../../../connection.js');
 const MessageController = require('../message-controller');
+const escape = require('mysql').escape;
 
 class ChallengeCommand extends MessageController {
   constructor() {
@@ -18,6 +19,11 @@ class ChallengeCommand extends MessageController {
     this.lastUsed = Date.now();
 
     querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`).catch(console.error);
+    querySql(`UPDATE \`GladiatorBot\`.\`Levels\` 
+    SET \`username\` = ${escape(message.author.username)}
+    WHERE \`UserId\` = ${message.author.id};`)
+    .catch(console.error);
+
     const target = message.mentions.users.first();
     if (arena.inProgress === true) {
       message.channel.send(`${message.author} there is already a battle in progress.  Please wait for it to finish before issuing your challenge`);
