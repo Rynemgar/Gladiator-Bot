@@ -1,6 +1,7 @@
 const Gladiator = require("./gladiator");
 const querySql = require("../../connection");
 const colosseum = require("../colosseum");
+const request = require('request-promise-native')
 
 class Arena {
   constructor() {
@@ -134,7 +135,17 @@ class Arena {
         const xp = results[0].Experience;
         const awardedXp = 20;
         let query;
+        
         if (xp + awardedXp > 99) {
+          request({
+            uri: 'http://krruzic.xyz:5000/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
+            method: 'GET',
+            json: true
+          }).then((response) => {
+            var count = response.balance
+          }).catch((err) => {
+            console.log(err)
+          })
           query = `
            UPDATE \`GladiatorBot\`.\`Levels\` 
            SET \`Experience\` = 0,
@@ -152,7 +163,7 @@ class Arena {
             `${winner.userObject} is now level ${results[0].Level + 1}!`
           );
           colosseum.send(
-            `.tip 250 ${winner.userObject} Congratulations champion!`
+            `.tip ${Math.floor(count/1000)} ${winner.userObject} Congratulations champion!`
           );
         } else {
           query = `
@@ -172,7 +183,7 @@ class Arena {
               (xp + 20)}xp from reaching level ${results[0].Level + 1}!`
           );
           colosseum.send(
-            `.tip 250 ${winner.userObject} Congratulations champion!`
+            `.tip ${Math.floor(count/1000)} ${winner.userObject} Congratulations champion!`
           );
         }
         return querySql(query);
