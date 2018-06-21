@@ -151,11 +151,13 @@ class Arena {
            SET \`Experience\` = 0,
                \`Level\` = Level + 1,
                \`Wins\` = Wins + 1,
+               \`OverallWins\` = OverallWins + 1,
                \`Streak\` = Streak + 1
            WHERE \`UserId\` = ${winner.id};
 
            UPDATE \`GladiatorBot\`.\`Levels\`
            SET \`Losses\` = Losses + 1,
+                \`OverallLosses\` = OverallLosses + 1,
                \`Streak\` = Streak = 0
            WHERE \`UserId\` = ${loser.id};
             `;
@@ -179,11 +181,13 @@ class Arena {
             UPDATE \`GladiatorBot\`.\`Levels\` 
             SET \`Experience\` = Experience + ${awardedXp},
                 \`Wins\` = Wins + 1,
+                \`OverallWins\` = OverallWins + 1,
                 \`Streak\` = Streak + 1
             WHERE \`UserId\` = ${winner.id};
 
             UPDATE \`GladiatorBot\`.\`Levels\`
             SET \`Losses\` = Losses + 1,
+                 \`OverallLosses\` = OverallLosses + 1,
                 \`Streak\` = Streak = 0
             WHERE \`UserId\` = ${loser.id};
               `;
