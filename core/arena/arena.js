@@ -119,7 +119,7 @@ if (!winner) {
   this.gladiator1 = null;
   this.gladiator2 = null;
 } else {
-  colosseum.send(`I guess your opponent has run scared ${abandoned}.  Release the Lions!`);
+  colosseum.send(`I guess your opponent has run scared ${winner}.  Release the Lions!`);
   const loser = winner === gladiator1 ? this.gladiator2 : this.gladiator1;
   this.endArena(winner, loser);
 }
