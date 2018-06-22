@@ -110,19 +110,20 @@ class Arena {
 
   expireArena() {
     console.log("Arena Expire");
-    const winner = this.lastAttacker === this.gladiator1 ? this.gladiator1 : this.gladiator2;
+    const winner = this.lastAttacker.user === this.gladiator1.userObject ? this.gladiator1 : this.gladiator2;
 
 if (!winner) {
   colosseum.send(`I guess ${this.gladiator1} and ${this.gladiator2} fell asleep.  Arena Expired!`)
+  
+} else {
+  colosseum.send(`I guess your opponent has run scared ${winner.userObject}.  Release the Lions!`);
+  const loser = winner === this.gladiator1 ? this.gladiator2 : this.gladiator1;
+  this.endArena(winner, loser);
+}
   this.inProgress = false;
   this.lastAttacker = null;
   this.gladiator1 = null;
   this.gladiator2 = null;
-} else {
-  colosseum.send(`I guess your opponent has run scared ${winner}.  Release the Lions!`);
-  const loser = winner === this.gladiator1 ? this.gladiator2 : this.gladiator1;
-  this.endArena(winner, loser);
-}
   }
 
   endArena(winner, loser) {
