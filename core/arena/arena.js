@@ -120,7 +120,7 @@ if (!winner) {
   this.gladiator2 = null;
 } else {
   colosseum.send(`I guess your opponent has run scared ${winner}.  Release the Lions!`);
-  const loser = winner === gladiator1 ? this.gladiator2 : this.gladiator1;
+  const loser = winner === this.gladiator1 ? this.gladiator2 : this.gladiator1;
   this.endArena(winner, loser);
 }
   }
