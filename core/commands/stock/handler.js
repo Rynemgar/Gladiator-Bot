@@ -26,7 +26,7 @@ class StockCommand extends MessageController {
         message.reply(`you are currently holding ${stock} potions.
 To purchase more at 150 TRTL each, tip Gladiator bot in the following way:
 
-.tip *amount* @Gladiator Bot Potions
+.tip *amount* @Gladiator Bot potions
 
 You must include the word potions!`);
       })
