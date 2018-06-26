@@ -176,7 +176,7 @@ if (!winner) {
           }).then((response) => {
             var count = response.balance
             colosseum.send(
-              `.tip ${Math.floor(count/1000)} ${winner.userObject} Congratulations champion!`
+              `.tip ${Math.floor(count/10000)} ${winner.userObject} Congratulations champion!`
             );
           }).catch((err) => {
             console.log(err)
@@ -207,7 +207,7 @@ if (!winner) {
           }).then((response) => {
             var count = response.balance
             colosseum.send(
-              `.tip ${Math.floor(count/1000)} ${winner.userObject} Congratulations champion!`
+              `.tip ${Math.floor(count/10000)} ${winner.userObject} Congratulations champion!`
             );
           }).catch((err) => {
             console.log(err)
