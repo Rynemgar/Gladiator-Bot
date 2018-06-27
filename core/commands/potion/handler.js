@@ -28,8 +28,13 @@ class PotionCommand extends MessageController {
         message.channel.send(`You don't have any potions at hand Gladiator ${message.author}`)
       return;
       }
-
-      const result = arena.attackPotion(message.author);
+      this.crit = {
+        chance: 0.95
+      }
+      
+      const roll = Math.random();
+        if (roll < this.crit.chance) {
+          const result = arena.attackPotion(message.author);
       switch (result.message) {
         case 'HIT':
           //Handle hit
@@ -43,6 +48,21 @@ class PotionCommand extends MessageController {
           console.log(result);
       }
     }
+    else {
+      const result = arena.critPotion(message.author);
+      switch (result.message) {
+        case 'HIT':
+          //Handle Crit potion
+          message.channel.send(`${result.gladiator.userObject} drinks a potion and immediately looks greatly recovered! ${result.gladiator.health}hp remaining!`)
+          break;
+        case 'NOT_GLADIATOR':
+          // Handle not gladiator
+          message.channel.send(`${message.author} is trying to get in on the action. GUARDS?!`);
+          break;
+        default:
+          console.log(result);
+    }
+  }
 
     querySql(`
       UPDATE \`GladiatorBot\`.\`Levels\`
@@ -52,8 +72,9 @@ class PotionCommand extends MessageController {
       console.log(results)
     })
     this.lastUsed = Date.now();
-  })
-}
+  }
+})
+  }
 }
 
 module.exports = new PotionCommand();

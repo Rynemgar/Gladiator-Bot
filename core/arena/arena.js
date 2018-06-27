@@ -9,7 +9,7 @@ class Arena {
     this.lastAttacker = false;
 
     this.baseGladiatorStats = {
-      health: 100
+      health: 100,
     };
 
     this.attacks = {
@@ -31,6 +31,14 @@ class Arena {
         targetSelf: true
       }
     };
+
+    this.crits = {
+      potion: {
+        chance: 1,
+        damage: -100,
+        targetSelf: true
+      }
+    }
 
     this.arenaExpirationTime = 60000;
     setInterval(() => {
@@ -89,7 +97,7 @@ class Arena {
             gladiator: attacker,
             target
           };
-        } else {
+         } else {
           return {
             message: "MISS",
             gladiator: attacker,
@@ -241,6 +249,10 @@ if (!winner) {
 
   attackPotion(attackingUser) {
     return this._attackGladiator(attackingUser, this.attacks.potion);
+  }
+
+  critPotion(attackingUser) {
+    return this._attackGladiator(attackingUser, this.crits.potion);
   }
 }
 
