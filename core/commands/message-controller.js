@@ -7,8 +7,8 @@ class MessageController {
     const isBot = message.author.bot;
     const isGlobalMessage = this.global;
     const isInColosseum = message.channel.name === 'colosseum';
-
-    if (!isBot && (isGlobalMessage || isInColosseum)) {
+//removed !isBot &&
+    if (isGlobalMessage || isInColosseum) {
       const date = new Date();
       console.log(`[${date.toUTCString()}] ${message.author.username}: ${message.content}`);
       this.handler(message);
