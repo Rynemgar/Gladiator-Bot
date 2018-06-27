@@ -44,6 +44,10 @@ class PotionCommand extends MessageController {
           // Handle not gladiator
           message.channel.send(`${message.author} is trying to get in on the action. GUARDS?!`);
           break;
+        case 'TURN':
+          // Handle out of turn
+          message.channel.send('How about you give your opponent a chance?  The fans don\'t like one sided battles');
+          break;
         default:
           console.log(result);
       }
@@ -58,6 +62,10 @@ class PotionCommand extends MessageController {
         case 'NOT_GLADIATOR':
           // Handle not gladiator
           message.channel.send(`${message.author} is trying to get in on the action. GUARDS?!`);
+          break;
+        case 'TURN':
+          // Handle out of turn
+          message.channel.send('How about you give your opponent a chance?  The fans don\'t like one sided battles');
           break;
         default:
           console.log(result);
