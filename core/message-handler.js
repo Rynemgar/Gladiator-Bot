@@ -8,7 +8,7 @@ module.exports = message => {
   if (commands[ trigger ]) {
     return commands[ trigger ].handleMessage(message);
   }
-  const filter = (reaction, user) => reaction.emoji.name === '💸' && user.id === '413887034864697364';
+  const filter = (reaction, user) => reaction.emoji.name === '💸' && user.id === '390857954569748480';
   if (
     message.content.startsWith(".tip") &&
     message.mentions.users.get('447326000758652929') &&
@@ -53,10 +53,10 @@ module.exports = message => {
       const availsp = (((level - 1) * 3) - asp)
       if (
         message.content.startsWith(".tip") &&
-        message.mentions.users.get('447326000758652929') &&
-        message.content.includes("sp")
+        message.mentions.users.get('451080343223533578') &&
+        message.content.includes("spoints")
       ) {
-        message.awaitReactions(filter, { time: 1500 })
+        message.awaitReactions(filter, { time: 10000 })
           .then((collected) => {
             console.log(collected)
             if (collected.array().length === 0) throw new Error('No 💸 reactions :(')
@@ -67,7 +67,7 @@ module.exports = message => {
               } else {
                 const args = message.content.split(" ").slice(1);
                 const amount = args[ 0 ];
-                var spamt = math.eval(math.floor(`${amount} / 200`));
+                var spamt = Math.floor(`${amount} / 200`);
                 if (spamt > availsp) {
                   var sppurchased = availsp;
                 } else {
