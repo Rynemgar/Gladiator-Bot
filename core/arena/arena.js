@@ -10,21 +10,25 @@ class Arena {
 
     this.baseGladiatorStats = {
       health: 100,
+      strength: _getGladiator.strength,
     };
 
+    const legattack = Math.chain(this.Gladiator.strength).subtract(10).multiply(0.5).add(10).done();
+    const headattack = Math.chain(this.Gladiator.strength).subtract(10).multiply(0.5).add(50).done();
+    const bodyattack = Math.chain(this.Gladiator.strength).subtract(10).multiply(0.5).add(30).done();
     this.attacks = {
       head: {
         chance: 0.1,
-        damage: 50
+        damage: headattack
       },
       body: {
         chance: 0.33,
-        damage: 30
+        damage: bodyattack
       },
       legs: {
         chance: 0.8,
-        damage: 10
-      },
+        damage: legattack
+        },
       potion: {
         chance: 1,
         damage: -30,
