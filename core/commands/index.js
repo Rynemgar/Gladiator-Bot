@@ -18,5 +18,8 @@ module.exports = {
   saygen: require('./say/handler'),
   saycol: require('./say/handler2'),
   balance: require('./balance/handler'),
-  stock: require('./stock/handler')
+  stock: require('./stock/handler'),
+  strength: require('./strength/handler'),
+  defense: require('./defense/handler'),
+  agility: require('./agility/handler')
 };
