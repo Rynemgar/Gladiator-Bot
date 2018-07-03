@@ -10,24 +10,20 @@ class Arena {
 
     this.baseGladiatorStats = {
       health: 100,
-      strength: _getGladiator.strength,
     };
 
-    const legattack = Math.chain(this.Gladiator.strength).subtract(10).multiply(0.5).add(10).done();
-    const headattack = Math.chain(this.Gladiator.strength).subtract(10).multiply(0.5).add(50).done();
-    const bodyattack = Math.chain(this.Gladiator.strength).subtract(10).multiply(0.5).add(30).done();
     this.attacks = {
       head: {
         chance: 0.1,
-        damage: headattack
+        damage: 50,
       },
       body: {
         chance: 0.33,
-        damage: bodyattack
+        damage: 30,
       },
       legs: {
         chance: 0.8,
-        damage: legattack
+        damage: 10,
         },
       potion: {
         chance: 1,
@@ -82,11 +78,14 @@ class Arena {
           timestamp: Date.now()
         };
         const roll = Math.random();
-        if (roll < attack.chance) {
+        const agi = attacker.agility * 0.001;
+        console.log(agi);
+        if (roll < attack.chance + agi) {
           if (attack.targetSelf) {
             attacker.damage(attack.damage);
           } else {
-            target.damage(attack.damage);
+            target.damage(Math.floor(((attacker.strength - 10) * 0.5) + attack.damage)-((target.defense -10) * 0.45));
+            console.log();
           }
 
           if (target.health <= 0) {
