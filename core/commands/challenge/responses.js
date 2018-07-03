@@ -7,10 +7,10 @@ module.exports.noMention = [
   '%author% tried to challenge someone but dropped their sword on their foot... bye bye toes...!'
 ];
 module.exports.mention = [
-  '%targetUser% You have been challenged to ritual combat by %author%!  Proceed to the arena... If you dare!',
-  '%targetUser%!  You\'re being challenged to a good old fashioned fisty cuffs by %author%. Better raise your weapon and come out swinging!',
-  '%author% is swinging his sword in your general direction, %targetUser%. Will you raise your shield or lose your head?',
-  '%author% kneels before the Gladiator Emporer asking if they can take the head of %targetUser%, maybe you should pay attention oh mighty warrior!',
-  'All the warriors of the mighty Kazha are gathered to watch as %targetUser% is challenged to a fight to the death by %author%!',
-  '%author% looks ferocious in their gladiator armour.  Perhaps %targetUser% should prepare for the worst'
+  '%targetUser% You have been challenged to ritual combat by %author%!  Proceed to the arena and *accept... If you dare!',
+  '%targetUser%!  You\'re being challenged to a good old fashioned fisty cuffs by %author%. Better raise your weapon, *accept and come out swinging!',
+  '%author% is swinging his sword in your general direction, %targetUser%. Will you raise your shield and *accept or lose your head?',
+  '%author% kneels before the Gladiator Emporer asking if they can take the head of %targetUser%, maybe you should pay attention and *accept the challenge oh mighty warrior!',
+  'All the warriors of the mighty Kazha are gathered to watch as %targetUser% is challenged to a fight to the death by %author%! *accept the challenge, weakling!',
+  '%author% looks ferocious in their gladiator armour.  Perhaps %targetUser% should prepare for the worst if they decide to *accept'
 ];
