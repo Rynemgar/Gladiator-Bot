@@ -77,7 +77,8 @@ module.exports = message => {
 
               querySql(`
                  UPDATE \`GladiatorBot\`.\`Levels\`
-                 SET \`StatPoints\` = StatPoints + ${sppurchased}
+                 SET \`StatPoints\` = StatPoints + ${sppurchased},
+                      \`OverallStatPoints\` = OverallStatPoints + ${sppurchased}
                  WHERE UserID = ${message.author.id}`)
                 .then(results => {
                   message.channel.send(`${message.author} purchased ${sppurchased} stat points for ${amount}TRTL`);
