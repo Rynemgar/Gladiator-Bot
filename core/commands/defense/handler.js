@@ -19,12 +19,12 @@ querySql(`
                 const spavail = results[0] && results[ 0 ].StatPoints;
 
         if (spavail < 1) {
-            message.channel.send(`You have no available stat points.  Stat points can be purchased by tipping like
+            message.author.send(`You have no available stat points.  Stat points can be purchased by tipping like
             ${code}.tip 200 @Turtacus spoints${code}`)
             return;
         }
           else {      
-            message.channel.send(`You have successfully assigned a stat point to defense - You gain 2 Defense`)
+            message.author.send(`You have successfully assigned a stat point to defense - You gain 2 Defense`)
         }
     })
 

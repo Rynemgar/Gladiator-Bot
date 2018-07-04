@@ -7,7 +7,7 @@ class GitCommand extends MessageController {
   }
   handler(message) {
     if (message.guild) message.delete(1000);
-    message.channel.send(`You can find the most recently updated code at https://github.com/Rynemgar/Gladiator-Bot`)
+    message.author.send(`You can find the most recently updated code at https://github.com/Rynemgar/Gladiator-Bot`)
   }
 }
 
