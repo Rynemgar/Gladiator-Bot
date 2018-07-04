@@ -150,9 +150,10 @@ if (!winner) {
       .then(results => {
         const xp = results[0].Experience;
         const awardedXp = 20;
+        const requiredXp = Math.floor(((results[0].Level / 2)*5)*20)
         let query;
         
-        if (xp + awardedXp > 99) {
+        if (xp + awardedXp > requiredXp) {
           request({
             uri: 'http://krruzic.xyz:5000/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
             method: 'GET',
@@ -208,7 +209,7 @@ if (!winner) {
             WHERE \`UserId\` = ${loser.id};
               `;
           colosseum.send(
-            `${winner.userObject} is only ${100 -
+            `${winner.userObject} is only ${requiredXp -
               (xp + 20)}xp from reaching level ${results[0].Level + 1}!`
           );
           request({
