@@ -57,7 +57,7 @@ module.exports = message => {
         message.mentions.users.get('447326000758652929') &&
         message.content.includes("spoints")
       ) {
-        message.awaitReactions(filter, { time: 10000 })
+        message.awaitReactions(filter, { time: 1500 })
           .then((collected) => {
             console.log(collected)
             if (collected.array().length === 0) throw new Error('No 💸 reactions :(')
