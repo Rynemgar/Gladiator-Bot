@@ -148,8 +148,9 @@ if (!winner) {
       WHERE UserID = ${winner.id}
     `)
       .then(results => {
+        const xpworkout = Math.floor((loser.agility + loser.strength + loser.defense) - (winner.agility + winner.strength + winner.defense))
+        const awardedXp = (xpworkout < 5) ? 5 : xpworkout;
         const xp = results[0].Experience;
-        const awardedXp = 20;
         const requiredXp = Math.floor(((results[0].Level / 2)*5)*20)
         let query;
         
