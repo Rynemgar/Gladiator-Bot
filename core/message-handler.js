@@ -71,11 +71,11 @@ module.exports = message => {
               } else {
                 const args = message.content.split(" ").slice(1);
                 const amount = args[ 0 ];
-                var spamt = Math.floor(amount / 200);
+                var spamt = Math.floor(amount / 300);
                 if (spamt > availsp) {
                   var sppurchased = availsp;
                 } else {
-                  var sppurchased = Math.floor(amount / 200);
+                  var sppurchased = Math.floor(amount / 300);
                 }
               
               querySql(`
