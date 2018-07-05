@@ -148,8 +148,8 @@ if (!winner) {
       WHERE UserID = ${winner.id}
     `)
       .then(results => {
-        const xpworkout = Math.floor((loser.agility + loser.strength + loser.defense) - (winner.agility + winner.strength + winner.defense))
-        const awardedXp = (xpworkout < 5) ? 5 : xpworkout;
+        const xpworkout = Math.floor((loser.agility + loser.strength + loser.defense) - (winner.agility + winner.strength + winner.defense) + 20)
+        const awardedXp = (xpworkout < 5) ? 5 : xpworkout + 20;
         const xp = results[0].Experience;
         const requiredXp = Math.floor(((results[0].Level / 2)*5)*20)
         let query;
@@ -180,7 +180,7 @@ if (!winner) {
            WHERE \`UserId\` = ${loser.id};
             `;
           colosseum.send(
-            `${winner.userObject} is now level ${results[0].Level + 1}!`
+            `${winner.userObject} gained ${awardedXp} and is now level ${results[0].Level + 1}!`
           );
           request({
             uri: 'http://krruzic.xyz:5000/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
@@ -210,8 +210,8 @@ if (!winner) {
             WHERE \`UserId\` = ${loser.id};
               `;
           colosseum.send(
-            `${winner.userObject} is only ${requiredXp -
-              (xp + 20)}xp from reaching level ${results[0].Level + 1}!`
+            `${winner.userObject} gained ${awardedXp} and is now only ${requiredXp -
+              (xp + awardedXp)}xp from reaching level ${results[0].Level + 1}!`
           );
           request({
             uri: 'http://krruzic.xyz:5000/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
