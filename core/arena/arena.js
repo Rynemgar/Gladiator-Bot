@@ -121,7 +121,8 @@ class Arena {
 
   expireArena() {
     console.log("Arena Expire");
-    const winner = this.lastAttacker.user === this.gladiator1.userObject ? this.gladiator1 : this.gladiator2;
+    console.log(`The last attacker is`, this.lastAttacker);
+    const winner = this.lastAttacker.user.id === this.gladiator1.id ? this.gladiator1 : this.gladiator2;
 
 if (!winner) {
   colosseum.send(`I guess ${this.gladiator1} and ${this.gladiator2} fell asleep.  Arena Expired!`)
@@ -149,7 +150,7 @@ if (!winner) {
     `)
       .then(results => {
         const xpworkout = Math.floor((loser.agility + loser.strength + loser.defense) - (winner.agility + winner.strength + winner.defense) + 20)
-        const awardedXp = (xpworkout < 5) ? 5 : xpworkout + 20;
+        const awardedXp = (xpworkout < 5) ? 5 : xpworkout;
         const xp = results[0].Experience;
         const requiredXp = Math.floor(((results[0].Level / 2)*5)*20)
         let query;
