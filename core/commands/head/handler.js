@@ -1,4 +1,5 @@
 const arena = require('../../arena/arena');
+const bold = "**";
 
 const MessageController = require('../message-controller');
 class HeadCommand extends MessageController {
@@ -20,11 +21,11 @@ class HeadCommand extends MessageController {
           break;
         case 'HIT':
           //Handle hit
-          message.channel.send(`${result.gladiator.userObject} lands a significant blow to the head of ${result.target.userObject}. ${result.target.health}hp remaining!`);
+          message.channel.send(`${result.gladiator.userObject} lands a significant blow to the head of ${result.target.userObject}. ${bold}${result.target.health}hp${bold} remaining!`);
           break;
         case 'MISS':
           // Handle miss
-          message.channel.send(`${result.gladiator.userObject} lines up for a hit to ${result.target.userObject} and misses extraordinarily. ${result.target.health}hp remaining!`);
+          message.channel.send(`${result.gladiator.userObject} lines up for a hit to ${result.target.userObject} and misses extraordinarily. ${bold}${result.target.health}hp${bold} remaining!`);
           break;
         case 'TURN':
           // Handle out of turn

@@ -1,7 +1,7 @@
 const Gladiator = require("./gladiator");
 const querySql = require("../../connection");
 const colosseum = require("../colosseum");
-const request = require('request-promise-native')
+const request = require('request-promise-native');
 
 class Arena {
   constructor() {
@@ -84,7 +84,8 @@ class Arena {
           if (attack.targetSelf) {
             attacker.damage(attack.damage);
           } else {
-            target.damage(Math.floor(((attacker.strength - 10) * 0.5) + attack.damage)-((target.defense -10) * 0.45));
+            const dam = Math.floor((((attacker.strength - 10) * 0.5) + attack.damage)-((target.defense -10) * 0.45));
+            target.damage(dam.toFixed(2));
             console.log();
           }
 
