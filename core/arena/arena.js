@@ -1,7 +1,7 @@
 const Gladiator = require("./gladiator");
 const querySql = require("../../connection");
 const colosseum = require("../colosseum");
-const request = require('request-promise-native')
+const request = require('request-promise-native');
 
 class Arena {
   constructor() {
@@ -15,16 +15,16 @@ class Arena {
     this.attacks = {
       head: {
         chance: 0.1,
-        damage: 50
+        damage: 50,
       },
       body: {
         chance: 0.33,
-        damage: 30
+        damage: 30,
       },
       legs: {
         chance: 0.8,
-        damage: 10
-      },
+        damage: 10,
+        },
       potion: {
         chance: 1,
         damage: -30,
@@ -78,11 +78,15 @@ class Arena {
           timestamp: Date.now()
         };
         const roll = Math.random();
-        if (roll < attack.chance) {
+        const agi = attacker.agility * 0.001;
+        console.log(agi);
+        if (roll < attack.chance + agi) {
           if (attack.targetSelf) {
             attacker.damage(attack.damage);
           } else {
-            target.damage(attack.damage);
+            const dam = Math.floor((((attacker.strength - 10) * 0.5) + attack.damage)-((target.defense -10) * 0.45));
+            target.damage(dam.toFixed(2));
+            console.log();
           }
 
           if (target.health <= 0) {
@@ -118,7 +122,8 @@ class Arena {
 
   expireArena() {
     console.log("Arena Expire");
-    const winner = this.lastAttacker.user === this.gladiator1.userObject ? this.gladiator1 : this.gladiator2;
+    console.log(`The last attacker is`, this.lastAttacker);
+    const winner = this.lastAttacker.user.id === this.gladiator1.id ? this.gladiator1 : this.gladiator2;
 
 if (!winner) {
   colosseum.send(`I guess ${this.gladiator1} and ${this.gladiator2} fell asleep.  Arena Expired!`)
@@ -145,11 +150,13 @@ if (!winner) {
       WHERE UserID = ${winner.id}
     `)
       .then(results => {
+        const xpworkout = Math.floor((loser.agility + loser.strength + loser.defense) - (winner.agility + winner.strength + winner.defense) + 20)
+        const awardedXp = (xpworkout < 5) ? 5 : xpworkout;
         const xp = results[0].Experience;
-        const awardedXp = 20;
+        const requiredXp = Math.floor(((results[0].Level / 2)*5)*20)
         let query;
         
-        if (xp + awardedXp > 99) {
+        if (xp + awardedXp > requiredXp) {
           request({
             uri: 'http://krruzic.xyz:5000/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
             method: 'GET',
@@ -175,7 +182,7 @@ if (!winner) {
            WHERE \`UserId\` = ${loser.id};
             `;
           colosseum.send(
-            `${winner.userObject} is now level ${results[0].Level + 1}!`
+            `${winner.userObject} gained ${awardedXp} and is now level ${results[0].Level + 1}!`
           );
           request({
             uri: 'http://krruzic.xyz:5000/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
@@ -205,8 +212,8 @@ if (!winner) {
             WHERE \`UserId\` = ${loser.id};
               `;
           colosseum.send(
-            `${winner.userObject} is only ${100 -
-              (xp + 20)}xp from reaching level ${results[0].Level + 1}!`
+            `${winner.userObject} gained ${awardedXp} and is now only ${requiredXp -
+              (xp + awardedXp)}xp from reaching level ${results[0].Level + 1}!`
           );
           request({
             uri: 'http://krruzic.xyz:5000/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',

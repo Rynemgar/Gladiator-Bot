@@ -1,5 +1,6 @@
 const arena = require('../../arena/arena');
 const MessageController = require('../message-controller');
+const bold = "**";
 
 class legsCommand extends MessageController {
   constructor() {
@@ -20,11 +21,11 @@ class legsCommand extends MessageController {
           break;
         case 'HIT':
           //Handle hit
-          message.channel.send(`${result.gladiator.userObject} lands a glancing slice to the legs of ${result.target.userObject}. ${result.target.health}hp remaining!`);
+          message.channel.send(`${result.gladiator.userObject} lands a glancing slice to the legs of ${result.target.userObject}. ${bold}${result.target.health}hp${bold} remaining!`);
           break;
         case 'MISS':
           // Handle miss
-          message.channel.send(`${result.gladiator.userObject} swings at ${result.target.userObject} but they rolled out of the way at the last moment. ${result.target.health}hp remaining!`);
+          message.channel.send(`${result.gladiator.userObject} swings at ${result.target.userObject} but they rolled out of the way at the last moment. ${bold}${result.target.health}hp${bold} remaining!`);
           break;
         case 'TURN':
           // Handle out of turn

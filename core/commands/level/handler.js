@@ -28,7 +28,8 @@ class LevelCommand extends MessageController {
         const wins = results[0] ? results[ 0 ].OverallWins : 0;
         const losses = results[0] ? results[ 0 ].OverallLosses : 0;
         const streak = results[0] ? results[ 0 ].Streak : 0;
-        message.reply(`You are currently Level ${level} with a current winning streak of ${streak} and an overall total of ${wins} wins and ${losses} losses!`);
+        message.channel.send(`You are currently Level ${level} with a current winning streak of ${streak} and an overall total of ${wins} wins and ${losses} losses!
+        To view more stats, including your strength, agility and defense go to www.Turtacus.com`);
       })
       .catch(console.error);
 

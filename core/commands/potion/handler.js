@@ -1,6 +1,7 @@
 const arena = require('../../arena/arena');
 const MessageController = require('../message-controller');
 const querySql = require('../../../connection');
+const bold = "**";
 
 class PotionCommand extends MessageController {
   constructor() {
@@ -38,7 +39,7 @@ class PotionCommand extends MessageController {
       switch (result.message) {
         case 'HIT':
           //Handle hit
-          message.channel.send(`${result.gladiator.userObject} drinks a potion of obscure colour! Their health seems to improve! ${result.gladiator.health}hp remaining!`);
+          message.channel.send(`${result.gladiator.userObject} drinks a potion of obscure colour! Their health seems to improve! ${bold}${result.target.health}hp${bold} remaining!`);
           break;
         case 'NOT_GLADIATOR':
           // Handle not gladiator

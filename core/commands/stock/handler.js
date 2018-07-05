@@ -15,20 +15,28 @@ class StockCommand extends MessageController {
     if (message.guild) message.delete(1000);
     querySql(`INSERT IGNORE INTO Levels (userId) VALUES (${message.author.id})`)
       .then(() => querySql(`
-        SELECT Potions
+        SELECT Potions,
+              StatPoints
         FROM Levels
         WHERE UserId = ${message.author.id}
         `))
 
       .then((results) => {
         const stock = results[0] ? results[ 0 ].Potions : 0;
+        const stats = results[0] ? results[ 0 ].StatPoints : 0;
         
-        message.reply(`you are currently holding ${stock} potions.
-To purchase more at 150 TRTL each, tip Gladiator bot in the following way:
+        message.reply(`you are currently holding ${stock} potions and have ${stats} Stat Points available to spend.
+To purchase more potions at 150 TRTL each, tip Gladiator bot in the following way:
 
 .tip *amount* @Gladiator Bot potions
 
-You must include the word potions!`);
+You must include the word potions!
+
+To purchase more stat points at 300 TRTL each, tip Gladiator bot in the following way:
+
+.tip *amount* @Gladiator Bot spoints
+
+You must include the word spoints!`);
       })
       .catch(console.error);
 
