@@ -29,6 +29,11 @@ class HelpCommand extends MessageController {
     Stat Points (300TRTL Each)
     .tip "amount" @GladiatorBot spoints
 
+    Using Stat Points
+    *strength = add 2 to your strength - Increase your attack power,
+    *defense = add 2 to your defense - Decrease damage taken,
+    *agility = add 2 to agility - Increase your chance of hitting successfully
+
     Battle Commands,
     *Challenge = Challenge another user to a duel of sorts!,
     *Accept = accepts the challenge issued,
