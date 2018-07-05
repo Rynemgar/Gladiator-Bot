@@ -16,6 +16,7 @@ class BodyCommand extends MessageController {
       switch (result.message) {
         case 'WIN':
           // handle win conditions
+          message.channel.send(`${result.gladiator.userObject} lands a gut shot to the body of ${result.target.userObject}. ${bold}${result.target.health}hp${bold} remaining!`);
           message.channel.send(`${result.winner.userObject} was victorious. ${result.loser.userObject} remains lifeless on the ground.`);
           message.channel.send(`To contribute to my prize fund, tip me directly!`);
           break;
