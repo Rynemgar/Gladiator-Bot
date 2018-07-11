@@ -45,7 +45,7 @@ class HelpCommand extends MessageController {
     *Legs = has a 80% chance of inflicting 10 damage to your opponent,
     *Potion = Recover 30hp if you have a potion - 5% chance of healing for 100hp!
 
-    And may the odds be *ever* in your favour!${code}
+    And may the odds be ever in your favour!${code}
  ` );
  message.channel.send(`To contribute to my prize fund, tip me directly!`);
   this.lastUsed = Date.now();
