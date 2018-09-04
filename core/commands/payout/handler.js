@@ -35,11 +35,9 @@ class PayoutCommand extends MessageController {
             }
           )
         });
-        for (const result of results) {
-          message.channel.send(`.tip 10000 ${users[0].userObject} with ${users[0].Wins} wins`);
-          message.channel.send(`.tip 6500 ${users[1].userObject} with ${users[1].Wins} wins`);
-          message.channel.send(`.tip 3500 ${users[2].userObject} with ${users[2].Wins} wins`);
-        }
+          message.channel.send(`.tip 1 ${users[0].userObject} with ${users[0].Wins} wins`);
+          message.channel.send(`.tip 1 ${users[1].userObject} with ${users[1].Wins} wins`);
+          message.channel.send(`.tip 1 ${users[2].userObject} with ${users[2].Wins} wins`);
       })
 
     if (this.lastUsed + this.cooldown > Date.now()) return;
