@@ -17,7 +17,7 @@ class PayoutCommand extends MessageController {
   handler(message) {
     if (message.guild) message.delete(1000);
     if(message.author.id !== config.ownerID) {
-        message.channel.send(`STOP! GUARDS! ${message.author.id} is trying to raid the vaults!`);
+        message.channel.send(`STOP! GUARDS! ${message.author} is trying to raid the vaults!`);
               return; //stop other people commanding bot
       }
       querySql(`
