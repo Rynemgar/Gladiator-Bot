@@ -40,6 +40,10 @@ class PayoutCommand extends MessageController {
           message.channel.send(`.tip 1 ${users[2].userObject} with ${users[2].Wins} wins`);
       })
 
+      querySql(`
+        UPDATE Wins = 0, Losses = 0
+        WHERE 1=1`)
+
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
 
