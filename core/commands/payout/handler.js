@@ -41,8 +41,10 @@ class PayoutCommand extends MessageController {
       })
 
       querySql(`
-        UPDATE Wins = 0, Losses = 0
-        WHERE 1=1`)
+      UPDATE \`GladiatorBot\`.\`Levels\` 
+      SET \`Wins\` = 0,
+          \`Losses\` = 0;
+      `)
 
     if (this.lastUsed + this.cooldown > Date.now()) return;
 
