@@ -38,6 +38,7 @@ class PayoutCommand extends MessageController {
           message.channel.send(`.tip 10000 ${users[0].userObject} with ${users[0].Wins} wins`);
           message.channel.send(`.tip 6500 ${users[1].userObject} with ${users[1].Wins} wins`);
           message.channel.send(`.tip 3500 ${users[2].userObject} with ${users[2].Wins} wins`);
+          message.channel.send(`The leaderboard is now reset and ready for the next round of blood to be spilt! There's 20k in TRTL to be won every week plus a prize every time you slaughter your rival!  Good luck and Good hunting Turtles!`)
       })
 
       querySql(`
