@@ -23,10 +23,10 @@ class HelpCommand extends MessageController {
     Gladiator Shop,
     Tipping Gbot in the following format where amount = cost of item, award items.
     
-    Potion (150TRTL Each)
+    Potion (25TRTL Each)
     .tip "amount" @GladiatorBot potions
 
-    Stat Points (300TRTL Each)
+    Stat Points (100TRTL Each)
     .tip "amount" @GladiatorBot spoints
 
     Using Stat Points

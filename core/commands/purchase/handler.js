@@ -10,7 +10,7 @@ console.log("Successful to point 1")
 {
   const args = message.content.split(" ").slice(1);
   const amount = args[0];
-  const potionamt = math.eval(math.floor(`${amount} / 150`));
+  const potionamt = math.eval(math.floor(`${amount} / 25`));
 
   console.log(`${message.author} purchased ${potionamt} potions for ${amount}TRTL`);
 

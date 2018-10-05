@@ -20,7 +20,7 @@ module.exports = message => {
         if (collected.array().length === 0) throw new Error('No 💸 reactions :(');
         const args = message.content.split(" ").slice(1);
         const amount = args[ 0 ];
-        const potionamt = Math.floor(amount / 150);
+        const potionamt = Math.floor(amount / 25);
 
         querySql(`
          UPDATE \`GladiatorBot\`.\`Levels\`
@@ -71,11 +71,11 @@ module.exports = message => {
               } else {
                 const args = message.content.split(" ").slice(1);
                 const amount = args[ 0 ];
-                var spamt = Math.floor(amount / 300);
+                var spamt = Math.floor(amount / 100);
                 if (spamt > availsp) {
                   var sppurchased = availsp;
                 } else {
-                  var sppurchased = Math.floor(amount / 300);
+                  var sppurchased = Math.floor(amount / 100);
                 }
               
               querySql(`
