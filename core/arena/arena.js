@@ -158,7 +158,7 @@ if (!winner) {
         
         if (xp + awardedXp > requiredXp) {
           request({
-            uri: 'http://krruzic.xyz:5000/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
+            uri: 'http:/trtlbot.krruzic.xyz/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
             method: 'GET',
             json: true
           }).then((response) => {
@@ -185,7 +185,7 @@ if (!winner) {
             `${winner.userObject} gained ${awardedXp} and is now level ${results[0].Level + 1}!`
           );
           request({
-            uri: 'http://krruzic.xyz:5000/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
+            uri: 'http:/trtlbot.krruzic.xyz/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
             method: 'GET',
             json: true
           }).then((response) => {
@@ -216,7 +216,7 @@ if (!winner) {
               (xp + awardedXp)}xp from reaching level ${results[0].Level + 1}!`
           );
           request({
-            uri: 'http://krruzic.xyz:5000/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
+            uri: 'http:/trtlbot.krruzic.xyz/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
             method: 'GET',
             json: true
           }).then((response) => {
