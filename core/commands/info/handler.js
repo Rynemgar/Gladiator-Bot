@@ -1,6 +1,6 @@
 
 const MessageController = require('../message-controller');
-class HelpCommand extends MessageController {
+class InfoCommand extends MessageController {
   constructor() {
     super();
     this.global = true;
@@ -25,4 +25,4 @@ class HelpCommand extends MessageController {
   
 }
 
-module.exports = new HelpCommand();
+module.exports = new InfoCommand();
