@@ -5,7 +5,6 @@ class MessageSweepCommand extends MessageController {
   constructor() {
     super();
     this.global = true;
-    this.cooldown = 0;
   }
   handler(message) {
     const args = message.content.split(" ").slice(1);
