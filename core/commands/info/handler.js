@@ -1,4 +1,4 @@
-
+const config = require('../../../config');
 const MessageController = require('../message-controller');
 class InfoCommand extends MessageController {
   constructor() {
