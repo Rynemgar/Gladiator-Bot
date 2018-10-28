@@ -14,7 +14,7 @@ class BalanceCommand extends MessageController {
     this.lastUsed = Date.now()
 
     request({
-      uri: 'http:/trtlbot.krruzic.xyz/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
+      uri: 'http://trtlbot.krruzic.xyz/balance?pid=ca746b821dad1d8458ec0f78880929049cb7db39d1e5381b8392522871d661d7',
       method: 'GET',
       json: true
     }).then((response) => {
