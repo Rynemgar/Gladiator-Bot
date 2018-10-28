@@ -22,5 +22,6 @@ module.exports = {
   strength: require('./strength/handler'),
   defense: require('./defense/handler'),
   agility: require('./agility/handler'),
-  payout: require('./payout/handler')
+  payout: require('./payout/handler'),
+  info: require('./info/handler')
 };
