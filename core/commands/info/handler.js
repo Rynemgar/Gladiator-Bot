@@ -9,7 +9,6 @@ class HelpCommand extends MessageController {
   handler(message) {
     if (message.guild) message.delete(1000);
     if(message.author.id !== config.ownerID) {
-        message.channel.send(`Only Rynem can issue this command, however, find info at http://www.turtacus.com`);
               return; //stop other people commanding bot
       }
     if (this.lastUsed + this.cooldown > Date.now()) return;
