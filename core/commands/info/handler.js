@@ -3,10 +3,15 @@ const MessageController = require('../message-controller');
 class HelpCommand extends MessageController {
   constructor() {
     super();
+    this.global = true;
     this.cooldown = 20000;
   }
   handler(message) {
     if (message.guild) message.delete(1000);
+    if(message.author.id !== config.ownerID) {
+        message.channel.send(`Only Rynem can issue this command, however, find info at http://www.turtacus.com`);
+              return; //stop other people commanding bot
+      }
     if (this.lastUsed + this.cooldown > Date.now()) return;
     const code = "```"
     message.channel.send(`The <#447104196454514690> is a place to battle your friends and foes to the death.  In a turn based system of deciding which part of your opponent's body to attack, you systematically reduce them to nothing more than a pool of blood.
