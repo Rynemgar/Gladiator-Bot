@@ -26,13 +26,13 @@ class StockCommand extends MessageController {
         const stats = results[0] ? results[ 0 ].StatPoints : 0;
         
         message.reply(`you are currently holding ${stock} potions and have ${stats} Stat Points available to spend.
-To purchase more potions at 150 TRTL each, tip Gladiator bot in the following way:
+To purchase more potions at 25 TRTL each, tip Gladiator bot in the following way:
 
 .tip *amount* @Gladiator Bot potions
 
 You must include the word potions!
 
-To purchase more stat points at 300 TRTL each, tip Gladiator bot in the following way:
+To purchase more stat points at 100 TRTL each, tip Gladiator bot in the following way:
 
 .tip *amount* @Gladiator Bot spoints
 
