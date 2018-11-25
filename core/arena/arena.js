@@ -85,8 +85,8 @@ class Arena {
             attacker.damage(attack.damage);
           } else {
             const dam = Math.floor((((attacker.strength - 10) * 0.5) + attack.damage)-((target.defense -10) * 0.45));
-            if (dam < attack.damage * 0.33) {
-              const damDealt = attack.damage * 0.33;
+            if (dam < attack.damage * 0.5) {
+              const damDealt = attack.damage * 0.5;
               target.damage(damDealt);
             } else {
               const damDealt = dam;
